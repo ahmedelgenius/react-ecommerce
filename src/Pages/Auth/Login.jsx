@@ -83,6 +83,15 @@ const Login = () => {
           </p>
         </div>
       </div>
+
+      <p className="mt-10 text-center text-sm text-gray-600">
+        <Link
+          to="/admin"
+          className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+        >
+          login as an admin
+        </Link>
+      </p>
     </>
   );
 };

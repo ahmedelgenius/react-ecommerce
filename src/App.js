@@ -14,6 +14,10 @@ import AllBrands from "./Pages/AllBrands";
 import { useState } from "react";
 import ProductPage from "./Pages/ProductPage";
 import PaymentMethodPage from "./Pages/PaymentMethodPage";
+import AdminPage from "./Pages/Admin/AdminPage";
+import AdminAllOrders from "./Pages/Admin/AdminAllOrders";
+import AdminAllProducts from "./Pages/Admin/AdminAllProducts";
+import AdminOrdersDetails from "./Pages/Admin/AdminOrdersDetails";
 
 function App() {
   return (
@@ -32,6 +36,11 @@ function App() {
         <Route path="/allbrands" element={<AllBrands />} />
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/orders/paymentmethod" element={<PaymentMethodPage />} />
+        <Route path="/admin" element={<AdminPage />}>
+          <Route path="/admin/allorders" element={<AdminAllOrders />} />
+          <Route path="/admin/allproducts" element={<AdminAllProducts />} />
+          <Route path="/admin/orders/:id" element={<AdminOrdersDetails />} />
+        </Route>
       </Routes>
 
       <Footer />
