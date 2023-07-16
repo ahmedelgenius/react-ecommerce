@@ -9,7 +9,11 @@ import SubTitle from "./../Utilits/SubTitle";
 const HomeBrands = () => {
   return (
     <div className="container mx-auto my-20">
-      <SubTitle title="Brands" btnTitle="Browse all brands →" />
+      <SubTitle
+        title="Brands"
+        btnTitle="Browse all brands →"
+        path="/allbrands"
+      />
       <div className="grid grid-cols-1 lg:grid-cols-5 place-content-center place-items-center gap-y-8">
         <BrandCard img={brandOne} />
         <BrandCard img={brandTwo} />

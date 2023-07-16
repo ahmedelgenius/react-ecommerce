@@ -1,9 +1,9 @@
 import React from "react";
-import Slider from "../../Components/Home/Slider";
-import HomeCategory from "../../Components/Home/HomeCategory";
-import ProductsContainer from "../../Components/Products/ProductsContainer";
-import HomeDiscount from "../../Components/Home/HomeDiscount";
-import HomeBrands from "../../Components/Home/HomeBrands";
+import Slider from "../Components/Home/Slider";
+import HomeCategory from "../Components/Home/HomeCategory";
+import ProductsContainer from "../Components/Products/ProductsContainer";
+import HomeDiscount from "../Components/Home/HomeDiscount";
+import HomeBrands from "../Components/Home/HomeBrands";
 
 const Home = () => {
   return (

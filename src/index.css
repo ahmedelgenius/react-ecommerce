@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* pagination */
+.page-link {
+  /* background-color: #bbbbbb !important; */
+  color: #000 !important;
+  border-radius: 10px !important;
+  border: solid 1px #272727 !important;
+}
+.page-link:hover {
+  background-color: #272727 !important;
+  color: white !important;
+  border: solid 1px 272727 !important;
+}
+
+.page-link {
+  padding: 10px 15px;
+}
+/* end pagination */
