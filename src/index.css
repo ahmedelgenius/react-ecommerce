@@ -19,3 +19,16 @@
   padding: 10px 15px;
 }
 /* end pagination */
+
+/* multi select  */
+
+.searchWrapper {
+  border-radius: 7px !important;
+
+  padding: 10px !important;
+
+  -webkit-border-radius: 7px !important;
+  -moz-border-radius: 7px !important;
+  -ms-border-radius: 7px !important;
+  -o-border-radius: 7px !important;
+}

@@ -18,22 +18,22 @@ const AdminSidebar = () => {
         </Link>
       </div>
       <div className="py-4 border-b-2 flex justify-center">
-        <Link to="/admin/allproducts" className="text-base font-semibold">
+        <Link to="/admin/addbrand" className="text-base font-semibold">
           Add Brand
         </Link>
       </div>
       <div className="py-4 border-b-2 flex justify-center">
-        <Link to="/admin/allproducts" className="text-base font-semibold">
+        <Link to="/admin/addcategory" className="text-base font-semibold">
           Add Category
         </Link>
       </div>
       <div className="py-4 border-b-2 flex justify-center">
-        <Link to="/admin/allproducts" className="text-base font-semibold">
+        <Link to="/admin/addsubcategory" className="text-base font-semibold">
           Add Subcategory
         </Link>
       </div>
       <div className="py-4 border-b-2 flex justify-center">
-        <Link to="/admin/allproducts" className="text-base font-semibold">
+        <Link to="/admin/addproducts" className="text-base font-semibold">
           Add Product
         </Link>
       </div>

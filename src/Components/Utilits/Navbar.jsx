@@ -112,7 +112,7 @@ const Navbar = () => {
 
                   {/* wishlist icon */}
                   <NavLink
-                    to="/wishlist"
+                    to="/user/wishlist"
                     className="flex rounded-lg h-10 w-10 items-center justify-center bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-800"
                   >
                     <img

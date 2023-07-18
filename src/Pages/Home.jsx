@@ -10,9 +10,17 @@ const Home = () => {
     <div>
       <Slider />
       <HomeCategory />
-      <ProductsContainer title="Best Seller" btnTitle="See Everything →" />
+      <ProductsContainer
+        title="Best Seller"
+        btnTitle="See Everything →"
+        path="/categories"
+      />
       <HomeDiscount />
-      <ProductsContainer title="New Arrivals" btnTitle="See Everything →" />
+      <ProductsContainer
+        title="New Arrivals"
+        btnTitle="See Everything →"
+        path="/categories"
+      />
       <HomeBrands />
     </div>
   );

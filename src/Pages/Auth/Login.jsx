@@ -92,6 +92,14 @@ const Login = () => {
           login as an admin
         </Link>
       </p>
+      <p className="mt-10 text-center text-sm text-gray-600">
+        <Link
+          to="/user"
+          className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+        >
+          login as an user
+        </Link>
+      </p>
     </>
   );
 };

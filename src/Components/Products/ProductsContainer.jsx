@@ -11,7 +11,7 @@ const ProductsContainer = ({ title, btnTitle, path, girdValue }) => {
         girdValue === 3 ? "container mx-auto mb-32" : "container mx-auto my-32"
       }
     >
-      <SubTitle title={title} btnTitle={btnTitle} />
+      <SubTitle title={title} btnTitle={btnTitle} path={path} />
 
       <div
         className={
