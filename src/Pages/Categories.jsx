@@ -2,8 +2,16 @@ import React, { useLayoutEffect } from "react";
 import SearchCountResult from "../Components/Utilits/SearchCountResult";
 import SideFilter from "../Components/Utilits/SideFilter";
 import Pagination from "../Components/Utilits/Pagination";
+import ViewSearchProductsHook from "./../hook/product/view-search-products";
 
 const Categories = () => {
+  const [productsList, pageCount, onPress, getProducts, results] =
+    ViewSearchProductsHook();
+  // if (productsList) {
+  //   console.log(productsList);
+  //   console.log(pageCount);
+  //   console.log(getPage);
+  // }
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -12,9 +20,10 @@ const Categories = () => {
       <div className="container mx-auto">
         {/* <SearchCountResult title="400 search result" /> */}
 
-        <SideFilter />
-
-        <Pagination />
+        <SideFilter products={productsList} />
+        {pageCount > 1 ? (
+          <Pagination pageCount={pageCount} onPress={onPress} />
+        ) : null}
       </div>
     </>
   );

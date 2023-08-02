@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
@@ -11,6 +11,8 @@ import {
 import { Slider } from "primereact/slider";
 import { InputText } from "primereact/inputtext";
 import ProductsContainer from "../Products/ProductsContainer";
+import ViewSearchProductsHook from "../../hook/product/view-search-products";
+import SideFilterHook from "../../hook/search/sidefilter-hook";
 // const subCategories = [
 //   { name: "Totes", href: "#" },
 //   { name: "Backpacks", href: "#" },
@@ -19,46 +21,90 @@ import ProductsContainer from "../Products/ProductsContainer";
 //   { name: "Laptop Sleeves", href: "#" },
 // ];
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
-];
-
-const filters = [
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
-    ],
-  },
-  {
-    id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
+  { name: "Not Sort", current: true },
+  { name: "Best Rating", current: false },
+  { name: "Price: Low to High", current: false },
+  { name: "Price: High to Low", current: false },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const SideFilter = () => {
+const SideFilter = ({ products }) => {
+  const [
+    productsList,
+    pageCount,
+    onPress,
+    getProducts,
+    results,
+    onChangePrice,
+    priceFrom,
+    priceTo,
+  ] = ViewSearchProductsHook();
+  const [category, brand, clickCategory, clickBrand] = SideFilterHook();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [value, setValue] = useState([2000, 4000]);
+  const [value, setValue] = useState([0, 1000]);
+  const [sortKey, setSortKey] = useState("");
+  // console.log(sortKey);
+  useEffect(() => {
+    onChangePrice(value);
+  }, [value]);
+
+  // console.log(value);
+  if (category) {
+    // console.log(category, brand);
+  }
+  let filters = [];
+  if (category && brand) {
+    filters = [
+      {
+        id: "category",
+        name: "Category",
+        options: category,
+      },
+      {
+        id: "brand",
+        name: "Brand",
+        options: brand,
+      },
+    ];
+  } else {
+    filters = [
+      {
+        id: "category",
+        name: "Category",
+        options: [
+          { value: "new-arrivals", label: "New Arrivals", checked: false },
+          { value: "sale", label: "Sale", checked: false },
+          { value: "travel", label: "Travel", checked: true },
+          { value: "organization", label: "Organization", checked: false },
+          { value: "accessories", label: "Accessories", checked: false },
+        ],
+      },
+      {
+        id: "brand",
+        name: "Brand",
+        options: [
+          { value: "white", label: "White", checked: false },
+          { value: "beige", label: "Beige", checked: false },
+          { value: "blue", label: "Blue", checked: true },
+          { value: "brown", label: "Brown", checked: false },
+          { value: "green", label: "Green", checked: false },
+          { value: "purple", label: "Purple", checked: false },
+        ],
+      },
+    ];
+  }
+
+  const onClick = () => {
+    getProducts();
+  };
+  const clickMe = (key) => {
+    localStorage.setItem("sortKey", key);
+    setSortKey(key);
+    onClick();
+  };
   return (
     <div className="bg-white">
       <div>
@@ -108,20 +154,6 @@ const SideFilter = () => {
 
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
-                    {/* <h3 className="sr-only">Categories</h3>
-                    <ul
-                      role="list"
-                      className="px-2 py-3 font-medium text-gray-900"
-                    >
-                      {subCategories.map((category) => (
-                        <li key={category.name}>
-                          <a href={category.href} className="block px-2 py-3">
-                            {category.name}
-                          </a>
-                        </li>
-                      ))}
-                    </ul> */}
-
                     {filters.map((section) => (
                       <Disclosure
                         as="div"
@@ -161,6 +193,11 @@ const SideFilter = () => {
                                       id={`filter-mobile-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
+                                      onChange={(e) => {
+                                        section.name === "Category"
+                                          ? clickCategory(e)
+                                          : clickBrand(e);
+                                      }}
                                       type="checkbox"
                                       defaultChecked={option.checked}
                                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -179,6 +216,7 @@ const SideFilter = () => {
                         )}
                       </Disclosure>
                     ))}
+
                     <div className="mb-2 border-t-2">
                       <span className="font-medium text-gray-900  ps-4">
                         Price
@@ -221,15 +259,18 @@ const SideFilter = () => {
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+            {/* <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               Products
-            </h1>
-
+            </h1> */}
+            <p className="text-xl font-semibold">
+              There are <span className="text-red-600"> {results} </span>{" "}
+              Products
+            </p>
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Sort
+                    {sortKey ? sortKey : "Sort"}
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
@@ -251,8 +292,10 @@ const SideFilter = () => {
                       {sortOptions.map((option) => (
                         <Menu.Item key={option.name}>
                           {({ active }) => (
-                            <a
-                              href={option.href}
+                            <button
+                              onClick={() => {
+                                clickMe(option.name);
+                              }}
                               className={classNames(
                                 option.current
                                   ? "font-medium text-gray-900"
@@ -262,7 +305,7 @@ const SideFilter = () => {
                               )}
                             >
                               {option.name}
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       ))}
@@ -290,9 +333,9 @@ const SideFilter = () => {
           </div>
 
           <section aria-labelledby="products-heading" className="pb-24 pt-5">
-            <h2 id="products-heading" className="sr-only">
+            {/* <h2 id="products-heading" className="sr-only">
               Products
-            </h2>
+            </h2> */}
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
@@ -347,6 +390,11 @@ const SideFilter = () => {
                                 <input
                                   id={`filter-${section.id}-${optionIdx}`}
                                   name={`${section.id}[]`}
+                                  onChange={(e) => {
+                                    section.name === "Category"
+                                      ? clickCategory(e)
+                                      : clickBrand(e);
+                                  }}
                                   defaultValue={option.value}
                                   type="checkbox"
                                   defaultChecked={option.checked}
@@ -401,7 +449,7 @@ const SideFilter = () => {
 
               {/* Product grid */}
               <div className=" lg:col-span-3">
-                <ProductsContainer girdValue={3} />
+                <ProductsContainer products={products} girdValue={3} />
               </div>
             </div>
           </section>

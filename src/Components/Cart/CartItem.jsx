@@ -62,7 +62,7 @@ const CartItem = () => {
         </div>
         <button
           type="button"
-          class="font-medium text-indigo-600 hover:text-indigo-500"
+          className="font-medium text-indigo-600 hover:text-indigo-500"
         >
           Remove
         </button>

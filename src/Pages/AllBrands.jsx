@@ -1,15 +1,14 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import BrandsContainer from "../Components/Brands/BrandsContainer";
 import Pagination from "../Components/Utilits/Pagination";
+import AllBrandHook from "../hook/brand/all-brand-hook";
 
 const AllBrands = () => {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  });
+  const [brands, loading, pageCount, getPage] = AllBrandHook();
   return (
     <>
-      <BrandsContainer />
-      <Pagination />
+      <BrandsContainer data={brands.data} loading={loading} />
+      {pageCount > 1 && <Pagination pageCount={pageCount} onPress={getPage} />}
     </>
   );
 };

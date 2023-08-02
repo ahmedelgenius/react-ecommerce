@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ img, name, price, rating, priceAfterDiscount }) => {
+const ProductCard = ({ img, name, price, rating, priceAfterDiscount, id }) => {
   return (
     <div
       className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
@@ -10,7 +10,7 @@ const ProductCard = ({ img, name, price, rating, priceAfterDiscount }) => {
       <button className="absolute top-4 right-5">
         <i className="pi pi-heart " style={{ fontSize: "1.5rem" }}></i>
       </button>
-      <Link to="/products/:id" className="flex flex-col  ">
+      <Link to={`/products/${id}`} className="flex flex-col  ">
         <div className="w-auto  h-1/2  p-6 ">
           <img src={img} className=" " alt="" />
         </div>
@@ -30,7 +30,7 @@ const ProductCard = ({ img, name, price, rating, priceAfterDiscount }) => {
               ) : (
                 ""
               )}
-              <p className=" font-bold text-base">{price} $ </p>
+              <p className=" font-bold text-base">Price: {price} $ </p>
             </div>
             <p
               className="font-bold flex justify-center items-center gap-1 text-lg"

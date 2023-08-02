@@ -9,6 +9,7 @@ import heartIcon from "../../assets/icons/heart.svg";
 import shoppingIcon from "../../assets/icons/shopping cart.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Cart from "./../../Pages/Cart";
+import NavbarSearchHook from "../../hook/search/navbar-search-hook";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -22,6 +23,11 @@ function classNames(...classes) {
 }
 const Navbar = () => {
   let navigate = useNavigate();
+  const [onChangeSearchWord, searchWord] = NavbarSearchHook();
+  let word = "";
+  if (localStorage.getItem("searchWord") != null) {
+    word = localStorage.getItem("searchWord");
+  }
   const openCart = () => {
     navigate("/cart");
   };
@@ -90,6 +96,8 @@ const Navbar = () => {
                 <span className=" p-input-icon-left hidden  lg:mr-14 lg:block ">
                   <i className="pi pi-search " />
                   <InputText
+                    value={word}
+                    onChange={onChangeSearchWord}
                     placeholder="Search"
                     className="h-10 "
                     style={{ backgroundColor: "#F6F6F6" }}

@@ -5,22 +5,13 @@ import productOne from "../../assets/images/Iphone.png";
 import catImgOne from "../../assets/images/laptop.png";
 import RightButton from "./RightButton";
 import LeftButton from "./LeftButton";
+import ViewProductDetailsHook from "../../hook/product/view-product-details.hook";
+import { useParams } from "react-router-dom";
 
 const ProductGallery = () => {
-  const images = [
-    {
-      original: `${productOne}`,
-      thumbnail: `${productOne}`,
-    },
-    {
-      original: `${catImgOne}`,
-      thumbnail: `${catImgOne}`,
-    },
-    {
-      original: `${productOne}`,
-      thumbnail: `${productOne}`,
-    },
-  ];
+  const { id } = useParams();
+  const [item, images] = ViewProductDetailsHook(id);
+
   return (
     <div className="w-3/4  container mx-auto">
       <ImageGallery

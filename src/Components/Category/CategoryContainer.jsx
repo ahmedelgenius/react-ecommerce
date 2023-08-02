@@ -1,23 +1,39 @@
 import React from "react";
 import CategoryCard from "./CategoryCard";
-import catImgOne from "../../assets/images/laptop.png";
-import catImgTwo from "../../assets/images/Iphone.png";
 import SubTitle from "../Utilits/SubTitle";
-const CategoryContainer = () => {
+
+const CategoryContainer = ({ categories, loading }) => {
+  console.log(categories);
+  console.log(loading);
   return (
     <div className="container mx-auto mt-20">
       <SubTitle title="All Categories" />
       <div className="grid grid-cols-1 lg:grid-cols-5 place-content-center place-items-center gap-y-8">
-        <CategoryCard title="Category One" img={catImgOne} />
-        <CategoryCard title="Category Two" img={catImgTwo} />
-        <CategoryCard title="Category Three" img={catImgOne} />
-        <CategoryCard title="Category Four" img={catImgTwo} />
-        <CategoryCard title="Category Five" img={catImgOne} />
-        <CategoryCard title="Category One" img={catImgOne} />
-        <CategoryCard title="Category Two" img={catImgTwo} />
-        <CategoryCard title="Category Three" img={catImgOne} />
-        <CategoryCard title="Category Four" img={catImgTwo} />
-        <CategoryCard title="Category Five" img={catImgOne} />
+        {loading === false ? (
+          categories.data ? (
+            categories.data.map((category, index) => {
+              return (
+                <CategoryCard
+                  key={index}
+                  title={category.name}
+                  img={category.image}
+                />
+              );
+            })
+          ) : (
+            <h2>categories is empty</h2>
+          )
+        ) : (
+          <div
+            className="   "
+            // style={{ marginLeft: "600px" }}
+          >
+            <i
+              className="pi pi-spin pi-spinner"
+              style={{ fontSize: "2.5rem" }}
+            ></i>
+          </div>
+        )}
       </div>
     </div>
   );

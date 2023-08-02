@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import uploadImg from "../../assets/images/upload.png";
+import AddBrandHook from "../../hook/brand/add-brand-hook";
+import { ToastContainer } from "react-toastify";
 const AdminAddBrand = () => {
-  const [value, setValue] = useState("");
+  const [
+    img,
+    nameEg,
+    nameAr,
+    loading,
+    isPress,
+    onImageChange,
+    handleSubmit,
+    onChangeNameEg,
+    onChangeNameAr,
+  ] = AddBrandHook();
   return (
     <>
       <div className="container mx-auto">
@@ -13,28 +25,60 @@ const AdminAddBrand = () => {
           <p className="font-semibold text-base pb-3 mr-7">Brand Image</p>
           <div>
             {" "}
-            <img src={uploadImg} alt="" />
+            <div className="relative">
+              <img src={img} className="w-32" alt="" />
+              <input
+                type="file"
+                className=" opacity-0 absolute  rotate-45 bg-red-400 w-full  top-1/3"
+                onChange={onImageChange}
+              />
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-5 items-center   ">
           <div className="w-1/2">
             <span className="p-float-label  ">
               <InputText
-                id="brandName"
-                value={value}
+                id="brandNameEnglish"
+                value={nameEg}
                 className="w-full"
-                onChange={(e) => setValue(e.target.value)}
+                onChange={onChangeNameEg}
               />
-              <label htmlFor="brandName">Brand Name</label>
+              <label htmlFor="brandNameEnglish">Brand Name (English)</label>
+            </span>
+          </div>
+          <div className="w-1/2">
+            <span className="p-float-label  ">
+              <InputText
+                id="brandNameArabic"
+                value={nameAr}
+                className="w-full"
+                onChange={onChangeNameAr}
+              />
+              <label htmlFor="brandNameArabic">Brand Name (Arabic)</label>
             </span>
           </div>
 
           <div>
-            <button className="bg-gray-900 rounded-xl text-white px-7 py-3">
+            <button
+              onClick={handleSubmit}
+              className="bg-gray-900 rounded-xl text-white px-7 py-3"
+            >
               Save
             </button>
           </div>
+          {isPress ? (
+            loading ? (
+              <i
+                className="pi pi-spin pi-spinner"
+                style={{ fontSize: "2.5rem" }}
+              ></i>
+            ) : (
+              <h3>created </h3>
+            )
+          ) : null}
         </div>
+        <ToastContainer />
       </div>
     </>
   );

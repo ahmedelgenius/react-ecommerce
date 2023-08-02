@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
-import uploadImg from "../../assets/images/upload.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AddCategoryHook from "../../hook/category/add-category-hook";
+
 const AdminAddCategory = () => {
-  const [value, setValue] = useState("");
+  const [
+    img,
+    nameEg,
+    nameAr,
+    loading,
+    isPress,
+    onImageChange,
+    handleSubmit,
+    onChangeNameEg,
+    onChangeNameAr,
+  ] = AddCategoryHook();
   return (
     <>
       <div className="container mx-auto">
@@ -13,28 +26,62 @@ const AdminAddCategory = () => {
           <p className="font-semibold text-base pb-3 mr-7">Category Image</p>
           <div>
             {" "}
-            <img src={uploadImg} alt="" />
+            <div className="relative">
+              <img src={img} className="w-32" alt="" />
+              <input
+                type="file"
+                className=" opacity-0 absolute  rotate-45 bg-red-400 w-full  top-1/3"
+                onChange={onImageChange}
+              />
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-5 items-center   ">
           <div className="w-1/2">
             <span className="p-float-label  ">
               <InputText
-                id="categoryName"
-                value={value}
+                id="categoryNameEnglish"
+                value={nameEg}
                 className="w-full"
-                onChange={(e) => setValue(e.target.value)}
+                onChange={onChangeNameEg}
               />
-              <label htmlFor="categoryName">Category Name</label>
+              <label htmlFor="categoryNameEnglish">
+                Category Name (English)
+              </label>
+            </span>
+          </div>
+          <div className="w-1/2">
+            <span className="p-float-label  ">
+              <InputText
+                id="categoryNameArabic"
+                value={nameAr}
+                className="w-full"
+                onChange={onChangeNameAr}
+              />
+              <label htmlFor="categoryNameArabic">Category Name (Arabic)</label>
             </span>
           </div>
 
           <div>
-            <button className="bg-gray-900 rounded-xl text-white px-7 py-3">
+            <button
+              onClick={handleSubmit}
+              className="bg-gray-900 rounded-xl text-white px-7 py-3"
+            >
               Save
             </button>
           </div>
+          {isPress ? (
+            loading ? (
+              <i
+                className="pi pi-spin pi-spinner"
+                style={{ fontSize: "2.5rem" }}
+              ></i>
+            ) : (
+              <h3>created </h3>
+            )
+          ) : null}
         </div>
+        <ToastContainer />
       </div>
     </>
   );

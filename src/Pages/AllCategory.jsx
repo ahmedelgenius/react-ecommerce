@@ -1,15 +1,14 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import CategoryContainer from "../Components/Category/CategoryContainer";
 import Pagination from "../Components/Utilits/Pagination";
+import AllCategoryHook from "../hook/category/all-category-hook";
 
 const AllCategory = () => {
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  });
+  const [categories, loading, pageCount, getPage] = AllCategoryHook();
   return (
     <>
-      <CategoryContainer />
-      <Pagination />
+      <CategoryContainer categories={categories} loading={loading} />
+      {pageCount > 1 && <Pagination pageCount={pageCount} onPress={getPage} />}
     </>
   );
 };

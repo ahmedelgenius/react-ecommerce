@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import ProductGallery from "./ProductGallery";
 import ProductContent from "./ProductContent";
+import ProductsContainer from "./ProductsContainer";
+import ViewProductDetailsHook from "../../hook/product/view-product-details.hook";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
   return (
