@@ -18,3 +18,15 @@ export const GET_ERROR = "GET_ERROR";
 export const GET_ALL_BRAND = "GET_ALL_BRAND";
 export const CREATE_BRAND = "CREATE_BRAND";
 export const GET_BRAND = "GET_BRAND";
+
+export const CREATE_USER = "CREATE_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const GET_LOGGED_USER = "GET_LOGGED_USER";
+export const FORGET_PASSWORD = "FORGET_PASSWORD";
+export const VERIFY_PASSWORD = "VERIFY_PASSWORD";
+export const RESET_PASSWORD = "RESET_PASSWORD";
+
+export const CREATE_REVIEW = "CREATE_REVIEW";
+export const All_REVIEW_PRODUCT = "All_REVIEW_PRODUCT";
+export const DELETE_REVIEW = "DELETE_REVIEW";
+export const UPDATE_REVIEW = "UPDATE_REVIEW";

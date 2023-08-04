@@ -35,6 +35,7 @@ const ProductsContainer = ({ title, btnTitle, path, girdValue, products }) => {
                   rating={item.ratingsAverage}
                   priceAfterDiscount={item.priceAfterDiscount}
                   id={item._id}
+                  ratingsQuantity={item.ratingsQuantity}
                 />
               );
             })

@@ -1,5 +1,5 @@
 import baseURL from "../../Api/BaseURL";
-import useGetData from "../../Hooks/useGetData";
+import { useGetData } from "../../Hooks/useGetData";
 import { useInsertDataWithImage } from "../../Hooks/useInsertData";
 import { GET_ALL_BRAND, GET_ERROR, CREATE_BRAND, GET_BRAND } from "../type";
 

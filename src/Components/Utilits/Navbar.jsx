@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { InputText } from "primereact/inputtext";
@@ -10,6 +10,8 @@ import shoppingIcon from "../../assets/icons/shopping cart.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Cart from "./../../Pages/Cart";
 import NavbarSearchHook from "../../hook/search/navbar-search-hook";
+import { useDispatch, useSelector } from "react-redux";
+import { getLoggedUser } from "../../redux/actions/authAction";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -23,11 +25,42 @@ function classNames(...classes) {
 }
 const Navbar = () => {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   const [onChangeSearchWord, searchWord] = NavbarSearchHook();
+  const [user, setUser] = useState("");
   let word = "";
   if (localStorage.getItem("searchWord") != null) {
     word = localStorage.getItem("searchWord");
   }
+
+  const logOut = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser("");
+  };
+  // const res = useSelector((state) => state.authReducer.userData);
+
+  useEffect(() => {
+    // const run = async () => {
+    //   await dispatch(getLoggedUser());
+    // };
+
+    // run();
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
+
+  // useEffect(() => {
+  //   // localStorage.setItem("user", JSON.stringify(res.data));
+  //   if (res) {
+  //     setUser(res.data);
+  //   }
+  // }, [res]);
+  // if (res) {
+  //   if (res.data) {
+
+  //   }
+  // }
+
   const openCart = () => {
     navigate("/cart");
   };
@@ -151,33 +184,49 @@ const Navbar = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      {isLogged ? (
+                      {user ? (
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                to="#"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Your Profile
-                              </Link>
-                            )}
-                          </Menu.Item>
+                          {user.role === "admin" ? (
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/admin"
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
+                                >
+                                  Dashboard
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          ) : (
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/user"
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
+                                >
+                                  My Profile
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          )}
 
                           <Menu.Item>
                             {({ active }) => (
-                              <Link
-                                to="#"
+                              <button
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
+                                onClick={logOut}
                               >
                                 Sign out
-                              </Link>
+                              </button>
                             )}
                           </Menu.Item>
                         </Menu.Items>

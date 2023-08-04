@@ -1,5 +1,5 @@
 import baseURL from "../../Api/BaseURL";
-import useGetData from "../../Hooks/useGetData";
+import { useGetData } from "../../Hooks/useGetData";
 import { useInsertDataWithImage } from "../../Hooks/useInsertData";
 import {
   GET_ALL_CATEGORY,

@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ img, name, price, rating, priceAfterDiscount, id }) => {
+const ProductCard = ({
+  img,
+  name,
+  price,
+  rating,
+  priceAfterDiscount,
+  id,
+  ratingsQuantity,
+}) => {
   return (
     <div
       className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
@@ -39,7 +47,7 @@ const ProductCard = ({ img, name, price, rating, priceAfterDiscount, id }) => {
               {rating}{" "}
               <i className="pi pi-star-fill" style={{ color: "#ffd700" }}></i>
               <span className="text-sm" style={{ color: "#A0A0A0" }}>
-                (120 reviews)
+                ({ratingsQuantity} reviews)
               </span>
             </p>
           </div>

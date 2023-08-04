@@ -1,46 +1,57 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { classNames } from "primereact/utils";
 import { InputTextarea } from "primereact/inputtextarea";
 import ReactStars from "react-rating-stars-component";
+import AddRateHook from "../../hook/review/add-rate-hook";
+import { useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 const RatePost = () => {
+  const { id } = useParams();
+
   const toast = useRef(null);
 
-  const show = () => {
-    toast.current.show({
-      severity: "success",
-      summary: "Form Submitted",
-      detail: form.getValues("description"),
-    });
-  };
+  const [
+    rateText,
+    rateValue,
+    onChangeRateText,
+    onChangeRateValue,
+    onSubmit,
+    user,
+  ] = AddRateHook(id);
 
+  // const show = () => {
+  //   toast.current.show({
+  //     severity: "success",
+  //     summary: "Form Submitted",
+  //     detail: form.getValues("description"),
+  //   });
+  // };
+
+  let name = "";
+  if (user) {
+    name = user.name;
+  }
   const defaultValues = { review: "" };
-  const form = useForm({ defaultValues });
-  const errors = form.formState.errors;
+  // const form = useForm({ defaultValues });
 
-  const onSubmit = (data) => {
-    data.review && show();
+  // const onSubmit = (data) => {
+  //   data.review && show();
 
-    form.reset();
-  };
+  //   form.reset();
+  // };
 
-  const getFormErrorMessage = (name) => {
-    return errors[name] ? (
-      <small className="p-error">{errors[name].message}</small>
-    ) : (
-      <small className="p-error">&nbsp;</small>
-    );
-  };
   const ratingChanged = (newRating) => {
-    console.log(newRating);
+    onChangeRateValue(newRating);
   };
   return (
     <div className="px-5">
       <div className="flex justify-center items-center gap-2">
-        <p className="text-xl font-semibold">user name</p>
+        <p className="text-xl font-semibold">{name}</p>
         <ReactStars
+          value={rateValue}
           count={5}
           onChange={ratingChanged}
           size={28}
@@ -53,34 +64,19 @@ const RatePost = () => {
       </div>
 
       <div className="card flex justify-center">
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-1"
-        >
-          <Toast ref={toast} />
-          <Controller
-            name="review"
-            control={form.control}
-            rules={{ required: "review is required." }}
-            render={({ field, fieldState }) => (
-              <>
-                <label htmlFor={field.name}></label>
-                <InputTextarea
-                  id={field.name}
-                  {...field}
-                  rows={3}
-                  cols={150}
-                  placeholder="Write your review"
-                  //   className={classNames({ "p-invalid": fieldState.error })}
-                  className="w-full"
-                />
-                {getFormErrorMessage(field.name)}
-              </>
-            )}
-          />
+        <form className="flex flex-col gap-3">
+          <div className="mt-2">
+            <InputTextarea
+              onChange={(e) => onChangeRateText(e.target.value)}
+              autoResize
+              rows={3}
+              cols={60}
+            />
+          </div>
           <div className="flex justify-center items-center">
             <Button
               label="Submit"
+              onClick={onSubmit}
               className="hover:opacity-90 w-1/4"
               style={{ backgroundColor: "#6366F1" }}
               type="submit"
@@ -89,6 +85,7 @@ const RatePost = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

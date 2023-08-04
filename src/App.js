@@ -30,6 +30,9 @@ import UserEditAddress from "./Pages/User/UserEditAddress";
 import ErrorPage from "./Pages/ErrorPage";
 import UserWishlist from "./Pages/User/UserWishlist";
 import AdminEditProduct from "./Pages/Admin/AdminEditProduct";
+import ForgetPassword from "./Pages/Auth/ForgetPassword";
+import VerifyPassword from "./Pages/Auth/VerifyPassword";
+import ResetPassword from "./Pages/Auth/ResetPassword";
 
 function App() {
   return (
@@ -48,6 +51,9 @@ function App() {
         <Route path="/allbrands" element={<AllBrands />} />
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/orders/paymentmethod" element={<PaymentMethodPage />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/verify-password" element={<VerifyPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/admin" element={<AdminPage />}>
           <Route path="/admin/allorders" element={<AdminAllOrders />} />
           <Route path="/admin/allproducts" element={<AdminAllProducts />} />

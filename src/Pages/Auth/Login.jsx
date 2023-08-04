@@ -1,7 +1,18 @@
 import React from "react";
 import logo from "../../assets/images/logoBig (2).png";
 import { Link } from "react-router-dom";
+import LoginHook from "../../hook/auth/login-hook";
+import { ToastContainer } from "react-toastify";
 const Login = () => {
+  const [
+    email,
+    password,
+    onChangeEmail,
+    onChangePassword,
+    loading,
+    onSubmit,
+    isPress,
+  ] = LoginHook();
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -23,6 +34,8 @@ const Login = () => {
               </label>
               <div className="mt-2">
                 <input
+                  value={email}
+                  onChange={onChangeEmail}
                   id="email"
                   name="email"
                   type="email"
@@ -43,7 +56,7 @@ const Login = () => {
                 </label>
                 <div className="text-sm">
                   <Link
-                    to="#"
+                    to="/forget-password"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
@@ -52,6 +65,8 @@ const Login = () => {
               </div>
               <div className="mt-2">
                 <input
+                  value={password}
+                  onChange={onChangePassword}
                   id="password"
                   name="password"
                   type="password"
@@ -65,9 +80,17 @@ const Login = () => {
             <div>
               <button
                 type="submit"
+                onClick={onSubmit}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                {isPress === true ? (
+                  <i
+                    className="pi pi-spin pi-spinner"
+                    style={{ fontSize: "1.5rem" }}
+                  ></i>
+                ) : (
+                  <span> Login</span>
+                )}
               </button>
             </div>
           </form>
@@ -100,6 +123,7 @@ const Login = () => {
           login as an user
         </Link>
       </p>
+      <ToastContainer />
     </>
   );
 };
