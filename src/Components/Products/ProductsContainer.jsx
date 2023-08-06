@@ -1,12 +1,9 @@
-import React from "react";
+import ProductsContainerHook from "../../hook/product/products-container-hook";
 import SubTitle from "./../Utilits/SubTitle";
 import ProductCard from "./ProductCard";
-import catImgOne from "../../assets/images/laptop.png";
-import catImgTwo from "../../assets/images/Iphone.png";
-import { useParams } from "react-router-dom";
-import ViewProductDetailsHook from "../../hook/product/view-product-details.hook";
 
 const ProductsContainer = ({ title, btnTitle, path, girdValue, products }) => {
+  const [favList] = ProductsContainerHook();
   return (
     <div
       className={
@@ -36,6 +33,7 @@ const ProductsContainer = ({ title, btnTitle, path, girdValue, products }) => {
                   priceAfterDiscount={item.priceAfterDiscount}
                   id={item._id}
                   ratingsQuantity={item.ratingsQuantity}
+                  favList={favList}
                 />
               );
             })

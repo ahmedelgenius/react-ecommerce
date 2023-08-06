@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { InputNumber } from "primereact/inputnumber";
+import EditAddressHook from "../../hook/address/edit-address-hook";
+import { useParams } from "react-router-dom";
 const UserEditAddress = () => {
-  const [addressName, setAddressName] = useState("");
-  const [addressDetails, setAddressDetails] = useState("");
-  const [addressPhone, setAddressPhone] = useState(null);
+  const { id } = useParams();
+  const [
+    alias,
+    details,
+    phone,
+    onChangeAlias,
+    onChangeDetails,
+    onChangePhone,
+    handleSubmit,
+  ] = EditAddressHook(id);
   return (
     <div>
       <div className="pl-5 mb-5">
@@ -16,18 +25,18 @@ const UserEditAddress = () => {
           <span className="p-float-label  ">
             <InputText
               id="addressName"
-              value={addressName}
+              value={alias}
               className="w-full"
               placeholder="home"
-              onChange={(e) => setAddressName(e.target.value)}
+              onChange={onChangeAlias}
             />
             <label htmlFor="addressName">Address Name</label>
           </span>
         </div>
         <div className="card flex justify-content-center">
           <InputTextarea
-            value={addressDetails}
-            onChange={(e) => setAddressDetails(e.target.value)}
+            value={details}
+            onChange={onChangeDetails}
             // placeholder="Address Details"
             placeholder="egypt, cairo , nsr city"
             rows={5}
@@ -35,20 +44,24 @@ const UserEditAddress = () => {
           />
         </div>
         <div className="w-1/2">
-          <span className="p-float-label">
-            <InputNumber
-              id="address-phone"
-              value={addressPhone}
-              className="w-full"
-              placeholder="012345687"
-              onValueChange={(e) => setAddressPhone(e.value)}
-            />
-            <label htmlFor="address-phone">Phone Number</label>
-          </span>
+          {/* <label htmlFor="phone" className=" block mb-2">
+            Phone
+          </label> */}
+          <input
+            value={phone}
+            id="phone"
+            mask="999-99999999"
+            onChange={onChangePhone}
+            className="w-full py-3 px-2 border-2 rounded-md  focus:outline-violet-300"
+            placeholder="Phone Number"
+          ></input>
         </div>
       </div>
       <div className="flex justify-center mt-16">
-        <button className="bg-gray-900 hover:bg-gray-800 px-10 py-3 rounded-lg text-white font-semibold ">
+        <button
+          onClick={handleSubmit}
+          className="bg-gray-900 hover:bg-gray-800 px-10 py-3 rounded-lg text-white font-semibold "
+        >
           Save Address Changes
         </button>
       </div>

@@ -47,19 +47,19 @@ const AdminAddProducts = () => {
     brandID,
   ] = AddProductHook();
 
-  console.log(
-    prodNameEg,
-    prodNameAr,
-    prodDescEg,
-    prodDescAr,
-    priceAfterValue,
-    price,
-    quantity,
-    catID,
-    brandID,
-    colors,
-    images
-  );
+  // console.log(
+  //   prodNameEg,
+  //   prodNameAr,
+  //   prodDescEg,
+  //   prodDescAr,
+  //   priceAfterValue,
+  //   price,
+  //   quantity,
+  //   catID,
+  //   brandID,
+  //   colors,
+  //   images
+  // );
   return (
     <>
       <div className="container mx-auto">

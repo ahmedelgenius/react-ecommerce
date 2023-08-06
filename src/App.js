@@ -33,6 +33,8 @@ import AdminEditProduct from "./Pages/Admin/AdminEditProduct";
 import ForgetPassword from "./Pages/Auth/ForgetPassword";
 import VerifyPassword from "./Pages/Auth/VerifyPassword";
 import ResetPassword from "./Pages/Auth/ResetPassword";
+import AdminAddCoupon from "./Pages/Admin/AdminAddCoupon";
+import AdminEditCoupon from "./Pages/Admin/AdminEditCoupon";
 
 function App() {
   return (
@@ -66,12 +68,14 @@ function App() {
           />
           <Route path="/admin/addproducts" element={<AdminAddProducts />} />
           <Route path="/admin/editproduct/:id" element={<AdminEditProduct />} />
+          <Route path="/admin/addcoupon" element={<AdminAddCoupon />} />
+          <Route path="/admin/editcoupon/:id" element={<AdminEditCoupon />} />
         </Route>
         <Route path="/user" element={<UserPage />}>
           <Route path="/user/allorders" element={<UserAllOrders />} />
           <Route path="/user/addresses" element={<UserAddresses />} />
           <Route path="/user/add-address" element={<UserAddAddress />} />
-          <Route path="/user/edit-address" element={<UserEditAddress />} />
+          <Route path="/user/edit-address/:id" element={<UserEditAddress />} />
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/user/wishlist" element={<UserWishlist />} />
         </Route>

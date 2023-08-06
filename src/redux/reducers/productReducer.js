@@ -10,7 +10,7 @@ import {
 } from "../type";
 
 const initial = {
-  product: [],
+  createProduct: [],
   allProducts: [],
   oneProduct: [],
   relatedProducts: [],
@@ -23,7 +23,7 @@ const productReducer = (state = initial, action) => {
   switch (action.type) {
     case CREATE_PRODUCT:
       return {
-        product: action.payload,
+        createProduct: action.payload,
         loading: false,
       };
     case GET_ALL_PRODUCTS:
@@ -58,11 +58,6 @@ const productReducer = (state = initial, action) => {
         loading: false,
       };
 
-    case GET_ERROR:
-      return {
-        loading: true,
-        product: action.payload,
-      };
     default:
       return state;
   }

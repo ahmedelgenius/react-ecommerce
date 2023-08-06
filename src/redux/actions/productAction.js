@@ -18,16 +18,16 @@ export const createProduct = (formData) => async (dispatch) => {
     // const res = await baseURL.get("/api/v1/categories");
 
     const response = await useInsertDataWithImage(`/api/v1/products`, formData);
-
+    console.log(response);
     dispatch({
       type: CREATE_PRODUCT,
       payload: response.data,
       loading: true,
     });
-  } catch (error) {
+  } catch (e) {
     dispatch({
-      type: GET_ERROR,
-      payload: "error" + error,
+      type: CREATE_PRODUCT,
+      payload: e.response,
     });
   }
 };

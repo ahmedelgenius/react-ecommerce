@@ -1,12 +1,13 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
-import DeleteAddressHook from "../../hook/address/delete-address-hook";
 
-const UserAddressesCard = ({ address }) => {
-  const [open, setOpen, cancelButtonRef, handelDelete] =
-    DeleteAddressHook(address);
+import { Link } from "react-router-dom";
+import CouponCardHook from "../../hook/coupon/coupon-card-hook";
+
+const AdminCouponCard = ({ coupon }) => {
+  const [open, setOpen, cancelButtonRef, dateString, formatDate, handelDelete] =
+    CouponCardHook(coupon);
   return (
     <div className="bg-slate-200 pb-8 pt-3 relative px-5 rounded-lg">
       <Transition.Root show={open} as={Fragment}>
@@ -53,11 +54,11 @@ const UserAddressesCard = ({ address }) => {
                           as="h3"
                           className="text-base font-semibold leading-6 text-gray-900"
                         >
-                          Delete Address
+                          Delete Coupon
                         </Dialog.Title>
                         <div className="mt-2">
                           <p className="text-sm text-gray-500">
-                            Are you sure you want to delete the address ?
+                            Are you sure you want to delete the coupon ?
                           </p>
                         </div>
                       </div>
@@ -90,13 +91,17 @@ const UserAddressesCard = ({ address }) => {
         </Dialog>
       </Transition.Root>{" "}
       <div className="flex flex-col ">
-        <p className="text-lg font-semibold pb-5">{address.alias}</p>
-        <p className="pb-3">{address.details}</p>
-        <p className="">Phone Number : {address.phone}</p>
+        <p className="text-lg font-semibold pb-5">
+          Coupon Name : {coupon.name}
+        </p>
+        <p className="pb-3 font-semibold">
+          Expire Date : {formatDate(dateString)}
+        </p>
+        <p className="font-semibold">Coupon Discount : {coupon.discount}%</p>
       </div>
       <div className="absolute right-4 top-3 flex gap-10">
         <Link
-          to={`/user/edit-address/${address._id}`}
+          to={`/admin/editcoupon/${coupon._id}`}
           class="font-medium text-indigo-600 hover:text-indigo-500"
         >
           Edit
@@ -112,5 +117,4 @@ const UserAddressesCard = ({ address }) => {
     </div>
   );
 };
-
-export default UserAddressesCard;
+export default AdminCouponCard;

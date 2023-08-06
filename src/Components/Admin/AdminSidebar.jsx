@@ -37,6 +37,11 @@ const AdminSidebar = () => {
           Add Product
         </Link>
       </div>
+      <div className="py-4 border-b-2 flex justify-center">
+        <Link to="/admin/addcoupon" className="text-base font-semibold">
+          Add Coupon
+        </Link>
+      </div>
     </div>
   );
 };

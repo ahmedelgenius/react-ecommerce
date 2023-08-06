@@ -1,4 +1,13 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  addProductToWishlist,
+  removeProductFromWishlist,
+} from "../../redux/actions/wishlistAction";
+import notify from "./../../hook/useNotifiction";
+import { ToastContainer } from "react-toastify";
+import ProductCardHook from "../../hook/product/product-card-hook";
 
 const ProductCard = ({
   img,
@@ -8,15 +17,30 @@ const ProductCard = ({
   priceAfterDiscount,
   id,
   ratingsQuantity,
+  favList,
 }) => {
+  const [isFavIcon, handelFav] = ProductCardHook(favList, id);
   return (
     <div
       className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
       style={{ backgroundColor: "#F1F1F1" }}
     >
       {" "}
-      <button className="absolute top-4 right-5">
-        <i className="pi pi-heart " style={{ fontSize: "1.5rem" }}></i>
+      {/* <img
+        src={isFavIcon}
+        onClick={handelFav}
+        className="absolute top-2 right-1"
+        alt=""
+      /> */}
+      <button onClick={handelFav} className="absolute top-2 right-1">
+        {isFavIcon === true ? (
+          <i
+            className="pi pi-heart-fill"
+            style={{ color: "red", fontSize: "1.5rem" }}
+          ></i>
+        ) : (
+          <i className="pi pi-heart " style={{ fontSize: "1.5rem" }}></i>
+        )}
       </button>
       <Link to={`/products/${id}`} className="flex flex-col  ">
         <div className="w-auto  h-1/2  p-6 ">
@@ -58,6 +82,7 @@ const ProductCard = ({
           Add To Cart
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

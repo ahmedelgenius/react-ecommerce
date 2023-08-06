@@ -5,6 +5,11 @@ import subcategoryReducer from "./subcategoryReducer";
 import productReducer from "./productReducer";
 import authReducer from "./authReducer";
 import reviewReducer from "./reviewReducer";
+import wishlistReducer from "./wishlistReducer";
+import { addCoupon } from "../actions/couponAction";
+import couponReducer from "./couponReducer";
+import addressReducer from "./addressReducer";
+import userReducer from "./userReducer";
 const rootReducer = combineReducers({
   allCategory: categoryReducer,
   allBrand: brandReducer,
@@ -12,6 +17,10 @@ const rootReducer = combineReducers({
   products: productReducer,
   authReducer: authReducer,
   reviewReducer: reviewReducer,
+  wishlistReducer: wishlistReducer,
+  couponReducer: couponReducer,
+  addressReducer: addressReducer,
+  userReducer: userReducer,
 });
 
 export default rootReducer;

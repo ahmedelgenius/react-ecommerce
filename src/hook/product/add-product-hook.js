@@ -191,33 +191,35 @@ const AddProductHook = () => {
       return fromData.append("subcategories", item._id);
     });
     setLoading(true);
+    console.log(FormData);
     await dispatch(createProduct(FormData));
     setLoading(false);
   };
-  const product = useSelector((state) => state.products.product);
+  const product = useSelector((state) => state.products.createProduct);
   useEffect(() => {
     if (loading === false) {
-      setProdNameEg("");
-      setProdNameAr("");
-      setProdDescEg("");
-      setProdDescAr("");
-      setPriceAfterValue(null);
-      setPrice(null);
-      setQuantity(null);
-      setSelectedImage(null);
-      setCatID("");
-      setBrandID("");
-      setSelectedSubID([]);
-      setImages([]);
-      setColors([]);
-      setOptions([]);
-      setTimeout(() => setLoading(false), 1500);
+      // setProdNameEg("");
+      // setProdNameAr("");
+      // setProdDescEg("");
+      // setProdDescAr("");
+      // setPriceAfterValue(null);
+      // setPrice(null);
+      // setQuantity(null);
+      // setSelectedImage(null);
+      // setCatID("");
+      // setBrandID("");
+      // setSelectedSubID([]);
+      // setImages([]);
+      // setColors([]);
+      // setOptions([]);
+      // setTimeout(() => setLoading(false), 1500);
       if (product) {
-        if (product.status === 201) {
-          notify("product is created", "success");
-        } else {
-          notify("there error in data", "error");
-        }
+        console.log(product);
+        // if (product.status === 201) {
+        //   notify("product is created", "success");
+        // } else {
+        //   notify("there error in data", "error");
+        // }
       }
     }
   }, [loading]);
