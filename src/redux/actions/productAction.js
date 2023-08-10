@@ -9,6 +9,8 @@ import {
   GET_ALL_PRODUCTS_PAGE,
   GET_ERROR,
   GET_PRODUCT,
+  GET_PRODUCTS_BRAND,
+  GET_PRODUCTS_CATEGORY,
   GET_RELATED_PRODUCTS,
   UPDATE_PRODUCT,
 } from "../type";
@@ -54,16 +56,16 @@ export const getProductDetails = (id) => async (dispatch) => {
     // const res = await baseURL.get("/api/v1/categories");
 
     const response = await useGetData(`/api/v1/products/${id}`);
-
+    // console.log(response);
     dispatch({
       type: GET_PRODUCT,
       payload: response.data,
       loading: true,
     });
-  } catch (error) {
+  } catch (e) {
     dispatch({
-      type: GET_ERROR,
-      payload: "error" + error,
+      type: GET_PRODUCT,
+      payload: e.response,
     });
   }
 };
@@ -153,6 +155,42 @@ export const updateProduct = (id, data) => async (dispatch) => {
     dispatch({
       type: GET_ERROR,
       payload: "error" + error,
+    });
+  }
+};
+
+export const getProductsByCategory = (id, limit, page) => async (dispatch) => {
+  try {
+    // const res = await baseURL.get("/api/v1/categories");
+    const response = await useGetData(
+      `/api/v1/products?limit=${limit}&page=${page}&category=${id}`
+    );
+
+    dispatch({
+      type: GET_PRODUCTS_CATEGORY,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_PRODUCTS_CATEGORY,
+      payload: e.response,
+    });
+  }
+};
+export const getProductsByBrand = (id, limit, page) => async (dispatch) => {
+  try {
+    const response = await useGetData(
+      `/api/v1/products?limit=${limit}&page=${page}&brand=${id}`
+    );
+
+    dispatch({
+      type: GET_PRODUCTS_BRAND,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_PRODUCTS_BRAND,
+      payload: e.response,
     });
   }
 };

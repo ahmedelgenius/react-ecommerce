@@ -25,7 +25,7 @@ const RateContainer = () => {
           className="font-bold flex justify-center items-center gap-1 text-lg"
           style={{ color: "#ffd700" }}
         >
-          {rateAvg.toFixed(2)}
+          {rateAvg && rateAvg.toFixed(2)}
           <i className="pi pi-star-fill" style={{ color: "#ffd700" }}></i>
           <span className="text-sm" style={{ color: "#A0A0A0" }}>
             ({rateQty} review)

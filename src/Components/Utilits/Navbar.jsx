@@ -12,7 +12,8 @@ import Cart from "./../../Pages/Cart";
 import NavbarSearchHook from "../../hook/search/navbar-search-hook";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedUser } from "../../redux/actions/authAction";
-
+import { Badge } from "primereact/badge";
+import GetAllUserCart from "../../hook/cart/get-all-user-cart-hook";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Categories", href: "/categories", current: false },
@@ -49,18 +50,7 @@ const Navbar = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
-  // useEffect(() => {
-  //   // localStorage.setItem("user", JSON.stringify(res.data));
-  //   if (res) {
-  //     setUser(res.data);
-  //   }
-  // }, [res]);
-  // if (res) {
-  //   if (res.data) {
-
-  //   }
-  // }
-
+  const [cartNum] = GetAllUserCart();
   const openCart = () => {
     navigate("/cart");
   };
@@ -142,13 +132,14 @@ const Navbar = () => {
                   {/* shopping icon */}
                   <button
                     onClick={() => openCart()}
-                    className="flex rounded-lg h-10 w-10 mr-3  items-center justify-center bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-800"
+                    className="flex rounded-lg h-10 w-10 mr-3  items-center justify-center bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-800"
                   >
-                    <img
-                      src={shoppingIcon}
-                      className="h-6 w-6 rounded-full"
-                      alt=""
-                    />
+                    <i
+                      className="pi text-[#959394]  pi-shopping-cart p-overlay-badge"
+                      style={{ fontSize: "1.6rem" }}
+                    >
+                      <Badge value={cartNum || 0} severity="danger"></Badge>
+                    </i>
                   </button>
 
                   {/* wishlist icon */}

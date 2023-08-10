@@ -16,9 +16,11 @@ const HomeBrands = () => {
           />
           <div className="grid grid-cols-1 lg:grid-cols-5 place-content-center place-items-center gap-y-8">
             {loading === false ? (
-              items ? (
+              items.length > 0 ? (
                 items.map((brand, index) => {
-                  return <BrandCard key={index} img={brand.image} />;
+                  return (
+                    <BrandCard id={brand._id} key={index} img={brand.image} />
+                  );
                 })
               ) : (
                 <h2>brands is empty</h2>

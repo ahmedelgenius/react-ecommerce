@@ -3,8 +3,9 @@ import catImgOne from "../../assets/images/laptop.png";
 import { Dropdown } from "primereact/dropdown";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-const UserProductsCard = () => {
+const UserProductsCard = ({ item }) => {
   const [selectedItem, setSelectedItem] = useState(1);
+  console.log(item);
   const items = [
     { label: 1, value: 1 },
     { label: 2, value: 2 },
@@ -18,23 +19,27 @@ const UserProductsCard = () => {
         <div className=" grid grid-cols-1 lg:gap-0  gap-4 lg:grid-cols-3 place-items-center ">
           <div className="grid grid-cols-2">
             <div className="">
+              {/* <img src={item.product.imageCover || productOne} alt="" /> */}
               <img src={productOne} alt="" />
             </div>
             <div className="flex  flex-col justify-between">
-              <h2 className="text-sm lg:text-lg font-semibold">Product name</h2>
+              <h2 className="text-sm lg:text-lg font-semibold">
+                {item.product.title || ""}
+              </h2>
+              <p className="text-sm lg:text-sm font-semibold">
+                Category:
+                <span>{item.product.category.name || ""}</span>
+              </p>
               <p
                 className="w-8 h-8 rounded-full "
-                style={{ backgroundColor: "#fca91e" }}
+                style={{ backgroundColor: item.color }}
               ></p>
-              <p className="text-base">
-                <span className="text-base font-semibold">Brand :</span> Iphone
-              </p>
             </div>
           </div>
           <div className="flex flex-col  items-center justify-center gap-2  w-full">
             <div className="w-full  flex justify-center">
               <Dropdown
-                value={selectedItem}
+                value={item.quantity}
                 onChange={(e) => setSelectedItem(e.value)}
                 options={items}
                 defaultValue={1}

@@ -35,8 +35,16 @@ import VerifyPassword from "./Pages/Auth/VerifyPassword";
 import ResetPassword from "./Pages/Auth/ResetPassword";
 import AdminAddCoupon from "./Pages/Admin/AdminAddCoupon";
 import AdminEditCoupon from "./Pages/Admin/AdminEditCoupon";
+import ProtectedRouteHook from "./hook/auth/protected-route-hook";
+import ProtectedRoute from "./Components/Utilits/ProtectedRoute";
+import ProductsByCategory from "./Pages/ProductsByCategory";
+import ProductsByBrand from "./Pages/ProductsByBrand";
 
 function App() {
+  const [user, isUser, isAdmin] = ProtectedRouteHook();
+  // console.log(user);
+  // console.log(isUser);
+  // console.log(isAdmin);
   return (
     <div className="App">
       <Navbar />
@@ -52,32 +60,46 @@ function App() {
         <Route path="/allcategory" element={<AllCategory />} />
         <Route path="/allbrands" element={<AllBrands />} />
         <Route path="/products/:id" element={<ProductPage />} />
-        <Route path="/orders/paymentmethod" element={<PaymentMethodPage />} />
+        <Route path="/products/category/:id" element={<ProductsByCategory />} />
+        <Route path="/products/brand/:id" element={<ProductsByBrand />} />
+
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/verify-password" element={<VerifyPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/admin" element={<AdminPage />}>
-          <Route path="/admin/allorders" element={<AdminAllOrders />} />
-          <Route path="/admin/allproducts" element={<AdminAllProducts />} />
-          <Route path="/admin/orders/:id" element={<AdminOrdersDetails />} />
-          <Route path="/admin/addbrand" element={<AdminAddBrand />} />
-          <Route path="/admin/addcategory" element={<AdminAddCategory />} />
-          <Route
-            path="/admin/addsubcategory"
-            element={<AdminAddSubCategory />}
-          />
-          <Route path="/admin/addproducts" element={<AdminAddProducts />} />
-          <Route path="/admin/editproduct/:id" element={<AdminEditProduct />} />
-          <Route path="/admin/addcoupon" element={<AdminAddCoupon />} />
-          <Route path="/admin/editcoupon/:id" element={<AdminEditCoupon />} />
+        <Route element={<ProtectedRoute auth={isAdmin} />}>
+          <Route path="/admin" element={<AdminPage />}>
+            <Route path="/admin/allorders" element={<AdminAllOrders />} />
+            <Route path="/admin/allproducts" element={<AdminAllProducts />} />
+            <Route path="/admin/orders/:id" element={<AdminOrdersDetails />} />
+            <Route path="/admin/addbrand" element={<AdminAddBrand />} />
+            <Route path="/admin/addcategory" element={<AdminAddCategory />} />
+            <Route
+              path="/admin/addsubcategory"
+              element={<AdminAddSubCategory />}
+            />
+            <Route path="/admin/addproducts" element={<AdminAddProducts />} />
+            <Route
+              path="/admin/editproduct/:id"
+              element={<AdminEditProduct />}
+            />
+            <Route path="/admin/addcoupon" element={<AdminAddCoupon />} />
+            <Route path="/admin/editcoupon/:id" element={<AdminEditCoupon />} />
+          </Route>
         </Route>
-        <Route path="/user" element={<UserPage />}>
-          <Route path="/user/allorders" element={<UserAllOrders />} />
-          <Route path="/user/addresses" element={<UserAddresses />} />
-          <Route path="/user/add-address" element={<UserAddAddress />} />
-          <Route path="/user/edit-address/:id" element={<UserEditAddress />} />
-          <Route path="/user/profile" element={<UserProfile />} />
-          <Route path="/user/wishlist" element={<UserWishlist />} />
+        <Route element={<ProtectedRoute auth={isUser} />}>
+          <Route path="/orders/paymentmethod" element={<PaymentMethodPage />} />
+
+          <Route path="/user" element={<UserPage />}>
+            <Route path="/user/allorders" element={<UserAllOrders />} />
+            <Route path="/user/addresses" element={<UserAddresses />} />
+            <Route path="/user/add-address" element={<UserAddAddress />} />
+            <Route
+              path="/user/edit-address/:id"
+              element={<UserEditAddress />}
+            />
+            <Route path="/user/profile" element={<UserProfile />} />
+            <Route path="/user/wishlist" element={<UserWishlist />} />
+          </Route>
         </Route>
       </Routes>
 

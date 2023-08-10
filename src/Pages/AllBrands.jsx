@@ -4,10 +4,10 @@ import Pagination from "../Components/Utilits/Pagination";
 import AllBrandHook from "../hook/brand/all-brand-hook";
 
 const AllBrands = () => {
-  const [brands, loading, pageCount, getPage] = AllBrandHook();
+  const [brandItems, loading, pageCount, getPage] = AllBrandHook();
   return (
     <>
-      <BrandsContainer data={brands.data} loading={loading} />
+      <BrandsContainer data={brandItems} loading={loading} />
       {pageCount > 1 && <Pagination pageCount={pageCount} onPress={getPage} />}
     </>
   );

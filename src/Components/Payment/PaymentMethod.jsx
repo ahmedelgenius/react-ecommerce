@@ -1,64 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useFormik } from "formik";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { RadioButton } from "primereact/radiobutton";
+import ViewAllAddressHook from "../../hook/address/view-all-address-hook";
+import { Dropdown } from "primereact/dropdown";
+import OrderPayCashHook from "../../hook/checkout/order-pay-cash-hook";
+import { ToastContainer } from "react-toastify";
 
 const PaymentMethod = () => {
-  const toast = useRef(null);
-
-  const radioBtns = [
-    {
-      id: "cash",
-      name: "cash",
-      value: "Payment when receiving",
-      inputId: "f1",
-    },
-    {
-      id: "card",
-      name: "card",
-      value: "Payment by credit card",
-      inputId: "f2",
-    },
-  ];
-
-  const show = () => {
-    toast.current.show({
-      severity: "success",
-      summary: "Form Submitted",
-      detail: formik.values.item,
-    });
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      item: "",
-    },
-    validate: (data) => {
-      let errors = {};
-
-      if (!data.item) {
-        errors.item = "Value is required.";
-      }
-
-      return errors;
-    },
-    onSubmit: (data) => {
-      data.item && show();
-      formik.resetForm();
-    },
-  });
-
-  const isFormFieldInvalid = (name) =>
-    !!(formik.touched[name] && formik.errors[name]);
-
-  const getFormErrorMessage = (name) => {
-    return isFormFieldInvalid(name) ? (
-      <small className="p-error">{formik.errors[name]}</small>
-    ) : (
-      <small className="p-error">&nbsp;</small>
-    );
-  };
+  const [
+    toast,
+    formik,
+    radioBtns,
+    getFormErrorMessage,
+    onSelectAddress,
+    handelOrderCash,
+    addressesList,
+    addressSelected,
+    totalPrice,
+    totalPriceAfterDiscount,
+  ] = OrderPayCashHook();
   return (
     <>
       <div
@@ -94,18 +56,32 @@ const PaymentMethod = () => {
               );
             })}
           </div>
+          <div className="flex w-1/3 my-3">
+            <Dropdown
+              value={addressSelected}
+              onChange={onSelectAddress}
+              options={addressesList}
+              virtualScrollerOptions={{ itemSize: 38 }}
+              placeholder="Choose a shipping address "
+              className="w-full  md:w-14rem"
+            />
+            {/* <Link></Link> */}
+          </div>
           {getFormErrorMessage("item")}
           <div className="flex items-center justify-evenly w-full py-5">
             <Button
               type="submit"
+              onClick={handelOrderCash}
               className="bg-indigo-600 w-1/2"
               label="Checkout"
             />
             <p className="border-2 px-2 py-3 font-semibold">
-              <span className="font-bold"> Order Total : </span> 1234$
+              <span className="font-bold"> Order Total : </span>{" "}
+              {totalPriceAfterDiscount ? totalPriceAfterDiscount : totalPrice}
             </p>
           </div>
         </form>
+        <ToastContainer />
       </div>
     </>
   );

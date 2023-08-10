@@ -15,7 +15,9 @@ const BrandsContainer = ({ data, loading }) => {
           {loading === false ? (
             data ? (
               data.map((brand, index) => {
-                return <BrandCard key={index} img={brand.image} />;
+                return (
+                  <BrandCard id={brand._id} key={index} img={brand.image} />
+                );
               })
             ) : (
               <h2>categories is empty</h2>

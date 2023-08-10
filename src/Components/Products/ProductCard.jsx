@@ -8,6 +8,8 @@ import {
 import notify from "./../../hook/useNotifiction";
 import { ToastContainer } from "react-toastify";
 import ProductCardHook from "../../hook/product/product-card-hook";
+import ViewProductDetailsHook from "../../hook/product/view-product-details.hook";
+import AddToCartHook from "../../hook/cart/add-to- cart-hook";
 
 const ProductCard = ({
   img,
@@ -20,6 +22,12 @@ const ProductCard = ({
   favList,
 }) => {
   const [isFavIcon, handelFav] = ProductCardHook(favList, id);
+
+  const [item, imagesList, productCategory, productBrand, products] =
+    ViewProductDetailsHook(id);
+
+  const [selectedColor, onSelectColor, classNames, addToCartHandel] =
+    AddToCartHook(id, item);
   return (
     <div
       className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
@@ -53,12 +61,15 @@ const ProductCard = ({
           <div className="  ">
             <div className="flex items-center justify-center  gap-2 py-2 ">
               {priceAfterDiscount ? (
-                <p
-                  className=" font-bold text-base  line-through  "
-                  style={{ color: "#A0A0A0" }}
-                >
-                  {priceAfterDiscount} ${" "}
-                </p>
+                <div>
+                  <p
+                    className=" font-bold text-base  line-through  "
+                    style={{ color: "#A0A0A0" }}
+                  >
+                    {priceAfterDiscount} ${" "}
+                  </p>
+                  <p className=" font-bold text-base">{price} $ </p>
+                </div>
               ) : (
                 ""
               )}
@@ -77,11 +88,14 @@ const ProductCard = ({
           </div>
         </div>
       </Link>
-      <div className=" flex justify-center my-2 items-center">
-        <button className="text-white font-bold h-10 flex justify-center items-center w-32 bg-gray-700 hover:bg-gray-600 rounded-lg">
+      {/* <div className=" flex justify-center my-2 items-center">
+        <button
+          onClick={addToCartHandel}
+          className="text-white font-bold h-10 flex justify-center items-center w-32 bg-gray-700 hover:bg-gray-600 rounded-lg"
+        >
           Add To Cart
         </button>
-      </div>
+      </div> */}
       <ToastContainer />
     </div>
   );

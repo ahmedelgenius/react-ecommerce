@@ -2,13 +2,36 @@ import React from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Link, useNavigate } from "react-router-dom";
+import ApplyCouponHook from "../../hook/cart/apply-coupon-hook";
+import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import notify from "../../hook/useNotifiction";
+import ViewAllAddressHook from "../../hook/address/view-all-address-hook";
 
-const CartCheckout = () => {
+const CartCheckout = ({
+  cartItems,
+  totalPrice,
+  couponNameValue,
+  totalPriceAfterDiscount,
+}) => {
   const navigate = useNavigate();
 
+  const [coupon, onChangeCoupon, applyHandel] = ApplyCouponHook();
+
   const getCheckout = () => {
-    navigate("/orders/paymentmethod");
+    if (cartItems.length >= 1) {
+      navigate("/orders/paymentmethod");
+    } else {
+      notify("please add product to cart", "warn");
+    }
   };
+
+  useEffect(() => {
+    if (couponNameValue) {
+      onChangeCoupon(couponNameValue);
+    }
+  }, [couponNameValue]);
+
   return (
     <div className="my-10">
       <div
@@ -16,24 +39,35 @@ const CartCheckout = () => {
         style={{ backgroundColor: "#f9f9f9" }}
       >
         <div className="flex justify-between gap-2 lg:gap-0 border-b-2 py-4">
-          <p>Subtotal</p>
-          <span className="font-semibold">$99.00</span>
-        </div>
-        <div className="flex justify-between gap-2 lg:gap-0 border-b-2 py-4">
           <p>Shipping</p>
-          <span className="font-semibold">$5.00</span>
+          <span className="font-semibold">$0.00</span>
         </div>
         <div className="flex justify-between gap-2 lg:gap-0 border-b-2 py-4">
           <p>Tax</p>
-          <span className="font-semibold">$8.32</span>
+          <span className="font-semibold">$0.00</span>
         </div>
         <div className="p-inputgroup my-5">
-          <Button label="Apply" />
-          <InputText placeholder="Discount Code" />
+          <Button label="Apply" onClick={applyHandel} />
+          <InputText
+            value={coupon}
+            placeholder="Discount Code"
+            onChange={(e) => onChangeCoupon(e.target.value)}
+          />
         </div>
         <div className="flex text-base gap-2 lg:gap-0 lg:text-xl font-semibold justify-between  border-t-2 py-4">
           <p>Order total</p>
-          <span className="font-semibold">$112.32</span>
+          <span className="font-semibold">
+            {totalPriceAfterDiscount >= 1 ? (
+              <div className="flex gap-5">
+                <span className="line-through text-gray-400">
+                  {totalPrice}$
+                </span>
+                <span>{totalPriceAfterDiscount}$</span>
+              </div>
+            ) : (
+              `${totalPrice}$`
+            )}
+          </span>
         </div>
       </div>
       <div
@@ -59,6 +93,7 @@ const CartCheckout = () => {
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -7,7 +7,7 @@ import {
 
 const initial = {
   category: [],
-  onCategory: [],
+  oneCategory: [],
   loading: true,
 };
 
@@ -21,7 +21,7 @@ const categoryReducer = (state = initial, action) => {
       };
     case GET_CATEGORY:
       return {
-        onCategory: action.payload,
+        oneCategory: action.payload,
         loading: false,
       };
     case CREATE_CATEGORY:

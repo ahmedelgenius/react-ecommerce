@@ -21,7 +21,7 @@ const ProductsContainerHook = () => {
   useEffect(() => {
     if (loading === false) {
       if (res) {
-        console.log(res);
+        // console.log(res);
         if (res.status === "success") {
           let idList = res.data;
 

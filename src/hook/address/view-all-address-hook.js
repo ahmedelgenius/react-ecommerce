@@ -17,7 +17,7 @@ const ViewAllAddressHook = () => {
   let addresses = [];
 
   if (res) {
-    console.log(res);
+    // console.log(res);
     if (res.status === "success") {
       addresses = res.data;
     }

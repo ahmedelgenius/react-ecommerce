@@ -10,12 +10,13 @@ import { useParams } from "react-router-dom";
 
 const ProductGallery = () => {
   const { id } = useParams();
-  const [item, images] = ViewProductDetailsHook(id);
+  const [item, imagesList, productCategory, productBrand, products] =
+    ViewProductDetailsHook(id);
 
   return (
     <div className="w-3/4  container mx-auto">
       <ImageGallery
-        items={images}
+        items={imagesList}
         defaultImage={productOne}
         showFullscreenButton={false}
         // isRTL={true}

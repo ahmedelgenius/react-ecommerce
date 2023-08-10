@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import AdminAllOrdersItem from "../../Components/Admin/AdminAllOrdersItem";
+import { useParams } from "react-router-dom";
+import UserAllOrdersItem from "../../Components/User/UserAllOrdersItem";
+import ViewOrderDetailsHook from "../../hook/admin/view-order-details-hook";
+import UserProductsCard from "../User/UserProductsCard";
 const items = [
   { label: "Under way", value: "Under way" },
   { label: "Been completed", value: "Been completed" },
@@ -8,14 +12,76 @@ const items = [
 ];
 const AdminOrdersDetails = () => {
   const [selectedItem, setSelectedItem] = useState(null);
+  const { id } = useParams();
+  const [orderItem] = ViewOrderDetailsHook(id);
+  if (orderItem) {
+    console.log(orderItem);
+  }
   return (
     <div className="container mx-auto ">
       <div className="pl-5 mb-5">
-        <h1 className="font-bold text-xl"> Order Details No : #23487</h1>
+        <h1 className="font-bold text-xl"> Order Details No : #</h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-1 gap-3  mx-5">
-        <AdminAllOrdersItem />
-        <AdminAllOrdersItem />
+        {/* <AdminAllOrdersItem />
+        <AdminAllOrdersItem /> */}
+        <div>
+          <div className="border-b-2 border-t-2 py-5  mb-5">
+            <div className="flex justify-between">
+              {/* <p className="text-lg lg:text-lg pb-5">
+                <span className="text-lg lg:text-lg font-semibold">
+                  Order number :{" "}
+                </span>
+                #
+              </p> */}
+              {/* <p className="font-semibold text-xl mr-10">
+                Total : {orderItem.totalOrderPrice || 0}
+              </p> */}
+            </div>
+            {orderItem
+              ? orderItem.cartItems
+                ? orderItem.cartItems.length >= 1
+                  ? orderItem.cartItems.map((item, index) => {
+                      return <UserProductsCard key={index} item={item} />;
+                    })
+                  : null
+                : null
+              : null}
+
+            <div className=" flex justify-evenly my-2">
+              <div className="flex justify-start">
+                <p className="font-semibold text-lg mr-10">
+                  Order status :{" "}
+                  {orderItem.isDelivered === false ? (
+                    <span className="text-gray-500">Underway</span>
+                  ) : (
+                    <span className="text-gray-500">Delivered</span>
+                  )}
+                </p>
+              </div>
+              <div className="flex justify-start">
+                <p className="font-semibold text-lg mr-10">
+                  Payment Status :{" "}
+                  {orderItem.isPaid === false ? (
+                    <span className="text-gray-500">Not Done</span>
+                  ) : (
+                    <span className="text-gray-500">Done</span>
+                  )}
+                </p>
+              </div>
+              <div className="flex justify-start">
+                <p className="font-semibold text-lg mr-10">
+                  Payment Method :{" "}
+                  {orderItem.paymentMethodType === "cash" ? (
+                    <span className="text-gray-500">Cash</span>
+                  ) : (
+                    <span className="text-gray-500">Credit Card</span>
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div
@@ -25,20 +91,23 @@ const AdminOrdersDetails = () => {
         <div>
           <h2 className="font-semibold text-lg pb-3">Customer Details:</h2>
           <p className=" text-base">
-            <span className="font-medium">Name: </span> Ahmed Hany
+            <span className="font-medium">Name: </span>{" "}
+            {orderItem.user ? orderItem.user.name : ""}
           </p>
           <p className=" text-base py-2">
             <span className="font-medium">Phone Number: </span>
-            01234325325
+            {orderItem.user ? orderItem.user.phone : ""}
           </p>
           <p className=" text-base">
             <span className="font-medium">Email: </span>
-            email@gamil.com
+            {orderItem.user ? orderItem.user.email : ""}
           </p>
         </div>
 
         <div className="flex justify-center py-5 mt-5 border-y-2 ">
-          <p className="text-lg font-medium ">Total Order : 400$</p>
+          <p className="text-lg font-medium ">
+            Total Order : {orderItem.totalOrderPrice || 0}
+          </p>
         </div>
         <div className="flex justify-center mt-10">
           <button className="bg-gray-900 px-5 py-3 mr-1 rounded-lg text-white">

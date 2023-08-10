@@ -1,7 +1,8 @@
 import React from "react";
 import UserProductsCard from "../../Pages/User/UserProductsCard";
 
-const UserAllOrdersItem = () => {
+const UserAllOrdersItem = ({ orderItem, numberOrder }) => {
+  // console.log(orderItem);
   return (
     <div>
       <div className="border-b-2 border-t-2 py-5  mb-5">
@@ -10,19 +11,51 @@ const UserAllOrdersItem = () => {
             <span className="text-lg lg:text-lg font-semibold">
               Order number :{" "}
             </span>
-            #12343254
+            #{numberOrder ? numberOrder : ""}
           </p>
-          <p className="font-semibold text-xl mr-10">total : $600</p>
+          <p className="font-semibold text-xl mr-10">
+            Total : {orderItem.totalOrderPrice || 0}
+          </p>
         </div>
+        {orderItem
+          ? orderItem.cartItems.length >= 1
+            ? orderItem.cartItems.map((item, index) => {
+                return <UserProductsCard key={index} item={item} />;
+              })
+            : null
+          : null}
 
-        <UserProductsCard />
-        <UserProductsCard />
-        <UserProductsCard />
-
-        <div className="flex justify-end">
-          <p className="font-semibold text-lg mr-10">
-            Order status : <span className="text-gray-500">Underway</span>
-          </p>
+        <div className=" flex justify-evenly my-2">
+          <div className="flex justify-start">
+            <p className="font-semibold text-lg mr-10">
+              Order status :{" "}
+              {orderItem.isDelivered === false ? (
+                <span className="text-gray-500">Underway</span>
+              ) : (
+                <span className="text-gray-500">Delivered</span>
+              )}
+            </p>
+          </div>
+          <div className="flex justify-start">
+            <p className="font-semibold text-lg mr-10">
+              Payment Status :{" "}
+              {orderItem.isPaid === false ? (
+                <span className="text-gray-500">Not Done</span>
+              ) : (
+                <span className="text-gray-500">Done</span>
+              )}
+            </p>
+          </div>
+          <div className="flex justify-start">
+            <p className="font-semibold text-lg mr-10">
+              Payment Method :{" "}
+              {orderItem.paymentMethodType === "cash" ? (
+                <span className="text-gray-500">Cash</span>
+              ) : (
+                <span className="text-gray-500">Credit Card</span>
+              )}
+            </p>
+          </div>
         </div>
       </div>
     </div>

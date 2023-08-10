@@ -23,6 +23,7 @@ const HomeCategory = () => {
                     <CategoryCard
                       key={index}
                       title={category.name}
+                      id={category._id}
                       img={category.image}
                     />
                   );

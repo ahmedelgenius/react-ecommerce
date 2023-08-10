@@ -17,10 +17,10 @@ export const getAllCategory = (limit) => async (dispatch) => {
       type: GET_ALL_CATEGORY,
       payload: response.data,
     });
-  } catch (error) {
+  } catch (e) {
     dispatch({
-      type: GET_ERROR,
-      payload: "error" + error,
+      type: GET_ALL_CATEGORY,
+      payload: e.response,
     });
   }
 };

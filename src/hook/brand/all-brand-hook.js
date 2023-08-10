@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,17 +7,37 @@ import {
 } from "./../../redux/actions/brandAction";
 const AllBrandHook = () => {
   const dispatch = useDispatch();
+  const [brandItems, setBrandItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    dispatch(getAllBrand(10));
+    const get = async () => {
+      setLoading(true);
+      await dispatch(getAllBrand(10));
+      setLoading(false);
+    };
+    get();
   }, []);
 
   const brands = useSelector((state) => state.allBrand.brand);
-  const loading = useSelector((state) => state.allBrand.loading);
+  // const loading = useSelector((state) => state.allBrand.loading);
 
   let pageCount = 0;
-  if (brands.paginationResult) {
-    pageCount = brands.paginationResult.numberOfPages;
+
+  if (brands) {
+    if (brands.paginationResult) {
+      pageCount = brands.paginationResult.numberOfPages;
+    }
   }
+
+  useEffect(() => {
+    if (loading === false) {
+      if (brands) {
+        if (brands.data) {
+          setBrandItems(brands.data);
+        }
+      }
+    }
+  }, [loading]);
 
   const getPage = (page) => {
     // getAllCategoryPage();
@@ -29,7 +49,7 @@ const AllBrandHook = () => {
     window.scrollTo(0, 0);
   });
 
-  return [brands, loading, pageCount, getPage];
+  return [brandItems, loading, pageCount, getPage];
 };
 
 export default AllBrandHook;

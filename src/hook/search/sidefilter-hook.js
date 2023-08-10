@@ -19,23 +19,29 @@ const SideFilterHook = () => {
   const brands = useSelector((state) => state.allBrand.brand);
   const categories = useSelector((state) => state.allCategory.category);
   let category = [];
-  if (categories.data) {
-    // eslint-disable-next-line array-callback-return
-    categories.data.map((item) => {
-      category.push({ value: item._id, label: item.name, checked: false });
+  if (categories) {
+    if (categories.data) {
+      // eslint-disable-next-line array-callback-return
+      categories.data.map((item) => {
+        category.push({ value: item._id, label: item.name, checked: false });
 
-      // return item;
-    });
+        // return item;
+      });
+    }
   }
+
   let brand = [];
-  if (brands.data) {
-    // eslint-disable-next-line array-callback-return
-    brands.data.map((item) => {
-      brand.push({ value: item._id, label: item.name, checked: false });
+  if (brands) {
+    if (brands.data) {
+      // eslint-disable-next-line array-callback-return
+      brands.data.map((item) => {
+        brand.push({ value: item._id, label: item.name, checked: false });
 
-      // return item;
-    });
+        // return item;
+      });
+    }
   }
+
   const [catChecked, setCatChecked] = useState([]);
   var queryCat = "";
 

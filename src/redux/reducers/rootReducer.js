@@ -10,6 +10,9 @@ import { addCoupon } from "../actions/couponAction";
 import couponReducer from "./couponReducer";
 import addressReducer from "./addressReducer";
 import userReducer from "./userReducer";
+import cartReducer from "./cartReducer";
+import checkoutReducer from "./checkoutReducer";
+import orderReducer from "./orderReducer";
 const rootReducer = combineReducers({
   allCategory: categoryReducer,
   allBrand: brandReducer,
@@ -21,6 +24,9 @@ const rootReducer = combineReducers({
   couponReducer: couponReducer,
   addressReducer: addressReducer,
   userReducer: userReducer,
+  cartReducer: cartReducer,
+  checkoutReducer: checkoutReducer,
+  orderReducer: orderReducer,
 });
 
 export default rootReducer;
