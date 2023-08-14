@@ -5,8 +5,16 @@ import Pagination from "../Components/Utilits/Pagination";
 import ViewSearchProductsHook from "./../hook/product/view-search-products";
 
 const Categories = () => {
-  const [productsList, pageCount, onPress, getProducts, results] =
-    ViewSearchProductsHook();
+  const [
+    productsList,
+    pageCount,
+    onPress,
+    getProducts,
+    results,
+    onChangePrice,
+    From,
+    To,
+  ] = ViewSearchProductsHook();
   // if (productsList) {
   //   console.log(productsList);
   //   console.log(pageCount);

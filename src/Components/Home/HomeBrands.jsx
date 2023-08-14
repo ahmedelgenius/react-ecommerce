@@ -30,10 +30,7 @@ const HomeBrands = () => {
                 <h2>brands is empty</h2>
               )
             ) : (
-              <div
-                className="flex justify-center  items-center text-center w-96   "
-                // style={{ marginLeft: "600px" }}
-              >
+              <div className="flex justify-center  items-center text-center w-96   ">
                 <i
                   className="pi pi-spin pi-spinner"
                   style={{ fontSize: "2.5rem" }}
