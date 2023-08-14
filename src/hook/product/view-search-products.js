@@ -65,8 +65,6 @@ const ViewSearchProductsHook = () => {
   let pageCount = 0;
   if (products && products.paginationResult) {
     pageCount = products.paginationResult.numberOfPages;
-  } else {
-    pageCount = 0;
   }
 
   let results = 0;
