@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import ProductCardHook from "../../hook/product/product-card-hook";
 import ViewProductDetailsHook from "../../hook/product/view-product-details.hook";
 import AddToCartHook from "../../hook/cart/add-to- cart-hook";
-
+import productImg from "../../";
 const ProductCard = ({
   img,
   name,
@@ -28,6 +28,8 @@ const ProductCard = ({
 
   const [selectedColor, onSelectColor, classNames, addToCartHandel] =
     AddToCartHook(id, item);
+
+  // console.log(item.images);
   return (
     <div
       className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
@@ -50,30 +52,37 @@ const ProductCard = ({
           <i className="pi pi-heart " style={{ fontSize: "1.5rem" }}></i>
         )}
       </button>
-      <Link to={`/products/${id}`} className="flex flex-col  ">
-        <div className="w-auto  h-1/2  p-6 ">
-          <img src={img} className=" " alt="" />
+      <Link
+        to={`/products/${id}`}
+        className="flex flex-col justify-center items-center "
+      >
+        <div className="w-4/5 h-1/2  mt-6  ">
+          <img
+            src={img ? img : ""}
+            className="rounded-md w-[250px] h-[200px] "
+            alt=""
+          />
         </div>
-        <div className="px-4  flex items-center flex-col ">
+        <div className="px-4  flex items-center flex-col mt-2 ">
           <h2 className="text-xl font-bold text-center truncate w-64">
             {name}
           </h2>
           <div className="  ">
             <div className="flex items-center justify-center  gap-2 py-2 ">
               {priceAfterDiscount ? (
-                <div>
+                <div className="flex justify-between gap-3">
                   <p
                     className=" font-bold text-base  line-through  "
                     style={{ color: "#A0A0A0" }}
                   >
-                    {priceAfterDiscount} ${" "}
+                    {priceAfterDiscount}${" "}
                   </p>
-                  <p className=" font-bold text-base">{price} $ </p>
+                  <p className=" font-bold text-base">{price}$</p>
                 </div>
               ) : (
-                ""
+                <p className=" font-bold text-base">{price}$</p>
               )}
-              <p className=" font-bold text-base">Price: {price} $ </p>
+              {/* <p className=" font-bold text-base">Price: {price} $ </p> */}
             </div>
             <p
               className="font-bold flex justify-center items-center gap-1 text-lg"

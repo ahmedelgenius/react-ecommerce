@@ -16,7 +16,7 @@ const BrandsContainer = ({ data, loading }) => {
             data ? (
               data.map((brand, index) => {
                 return (
-                  <BrandCard id={brand._id} key={index} img={brand.image} />
+                  <BrandCard id={brand._id} key={index} img={brand.image.url} />
                 );
               })
             ) : (

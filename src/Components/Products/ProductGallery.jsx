@@ -10,8 +10,7 @@ import { useParams } from "react-router-dom";
 
 const ProductGallery = () => {
   const { id } = useParams();
-  const [item, imagesList, productCategory, productBrand, products] =
-    ViewProductDetailsHook(id);
+  const [item, imagesList, products] = ViewProductDetailsHook(id);
 
   return (
     <div className="w-3/4  container mx-auto">
@@ -20,10 +19,16 @@ const ProductGallery = () => {
         defaultImage={productOne}
         showFullscreenButton={false}
         // isRTL={true}
+        // thumbnailPosition={"left"}
+        // originalWidth={"100px"}
+        // originalHeight={"100px"}
+        // thumbnailHeight={"100px"}
+        // thumbnailWidth={"100px"}
         showPlayButton={false}
         // showThumbnails={false}
         // showBullets={false}
         showNav={false}
+        // sizes={"250px"}
         renderRightNav={RightButton}
         renderLeftNav={LeftButton}
       />

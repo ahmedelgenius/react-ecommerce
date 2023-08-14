@@ -5,22 +5,30 @@ import { useParams } from "react-router-dom";
 import UserAllOrdersItem from "../../Components/User/UserAllOrdersItem";
 import ViewOrderDetailsHook from "../../hook/admin/view-order-details-hook";
 import UserProductsCard from "../User/UserProductsCard";
-const items = [
-  { label: "Under way", value: "Under way" },
-  { label: "Been completed", value: "Been completed" },
-  { label: "Cancel", value: "Cancel" },
-];
+import UpdateOrderStatusHook from "../../hook/admin/update-order-status-hook";
+import { ToastContainer } from "react-toastify";
+
 const AdminOrdersDetails = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
   const { id } = useParams();
   const [orderItem] = ViewOrderDetailsHook(id);
-  if (orderItem) {
-    console.log(orderItem);
-  }
+  const [
+    pay,
+    deliver,
+    onChangePay,
+    onChangeDeliver,
+    handelChangePay,
+    handelChangeDeliver,
+    formatDate,
+    items,
+    itemsPaid,
+  ] = UpdateOrderStatusHook(id);
   return (
     <div className="container mx-auto ">
       <div className="pl-5 mb-5">
-        <h1 className="font-bold text-xl"> Order Details No : #</h1>
+        <h1 className="font-bold text-xl">
+          {" "}
+          Create on : {formatDate(orderItem.createdAt)}
+        </h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-1 gap-3  mx-5">
         {/* <AdminAllOrdersItem />
@@ -109,21 +117,44 @@ const AdminOrdersDetails = () => {
             Total Order : {orderItem.totalOrderPrice || 0}
           </p>
         </div>
-        <div className="flex justify-center mt-10">
-          <button className="bg-gray-900 px-5 py-3 mr-1 rounded-lg text-white">
-            Save
-          </button>
+        <div className="flex justify-evenly flex-col lg:flex-row w-full">
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={handelChangeDeliver}
+              className="bg-gray-900 px-5 py-3 mr-1 rounded-lg text-white"
+            >
+              Save
+            </button>
 
-          <Dropdown
-            value={selectedItem}
-            onChange={(e) => setSelectedItem(e.value)}
-            options={items}
-            virtualScrollerOptions={{ itemSize: 38 }}
-            placeholder="Order Status"
-            className=" w-1/2 md:w-14rem"
-          />
+            <Dropdown
+              value={deliver}
+              onChange={(e) => onChangeDeliver(e.value)}
+              options={items}
+              virtualScrollerOptions={{ itemSize: 38 }}
+              placeholder="Order Status"
+              className=" w-full md:w-full"
+            />
+          </div>
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={handelChangePay}
+              className="bg-gray-900 px-5 py-3 mr-1 rounded-lg text-white"
+            >
+              Save
+            </button>
+
+            <Dropdown
+              value={pay}
+              onChange={(e) => onChangePay(e.value)}
+              options={itemsPaid}
+              virtualScrollerOptions={{ itemSize: 38 }}
+              placeholder="Payment Status"
+              className=" w-full md:w-full"
+            />
+          </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

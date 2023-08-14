@@ -14,12 +14,16 @@ const HomeBrands = () => {
             btnTitle="Browse all brands →"
             path="/allbrands"
           />
-          <div className="grid grid-cols-1 lg:grid-cols-5 place-content-center place-items-center gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 place-content-center place-items-center gap-y-8">
             {loading === false ? (
               items.length > 0 ? (
                 items.map((brand, index) => {
                   return (
-                    <BrandCard id={brand._id} key={index} img={brand.image} />
+                    <BrandCard
+                      id={brand._id}
+                      key={index}
+                      img={brand.image.url}
+                    />
                   );
                 })
               ) : (

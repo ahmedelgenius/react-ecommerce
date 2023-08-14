@@ -42,7 +42,7 @@ const SideFilter = ({ products }) => {
     priceFrom,
     priceTo,
   ] = ViewSearchProductsHook();
-  const [category, brand, clickCategory, clickBrand] = SideFilterHook();
+  const [categoryList, brandList, clickCategory, clickBrand] = SideFilterHook();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [value, setValue] = useState([0, 1000]);
   const [sortKey, setSortKey] = useState("");
@@ -52,21 +52,22 @@ const SideFilter = ({ products }) => {
   }, [value]);
 
   // console.log(value);
-  if (category) {
+  if (categoryList) {
     // console.log(category, brand);
   }
   let filters = [];
-  if (category && brand) {
+
+  if (categoryList && brandList) {
     filters = [
       {
         id: "category",
         name: "Category",
-        options: category,
+        options: categoryList,
       },
       {
         id: "brand",
         name: "Brand",
-        options: brand,
+        options: brandList,
       },
     ];
   } else {
@@ -74,25 +75,12 @@ const SideFilter = ({ products }) => {
       {
         id: "category",
         name: "Category",
-        options: [
-          { value: "new-arrivals", label: "New Arrivals", checked: false },
-          { value: "sale", label: "Sale", checked: false },
-          { value: "travel", label: "Travel", checked: true },
-          { value: "organization", label: "Organization", checked: false },
-          { value: "accessories", label: "Accessories", checked: false },
-        ],
+        options: [],
       },
       {
         id: "brand",
         name: "Brand",
-        options: [
-          { value: "white", label: "White", checked: false },
-          { value: "beige", label: "Beige", checked: false },
-          { value: "blue", label: "Blue", checked: true },
-          { value: "brown", label: "Brown", checked: false },
-          { value: "green", label: "Green", checked: false },
-          { value: "purple", label: "Purple", checked: false },
-        ],
+        options: [],
       },
     ];
   }

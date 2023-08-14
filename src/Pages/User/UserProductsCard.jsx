@@ -20,15 +20,20 @@ const UserProductsCard = ({ item }) => {
           <div className="grid grid-cols-2">
             <div className="">
               {/* <img src={item.product.imageCover || productOne} alt="" /> */}
-              <img src={productOne} alt="" />
+              <img
+                src={item && item.imageCover ? item.imageCover.url : productOne}
+                alt=""
+              />
             </div>
             <div className="flex  flex-col justify-between">
               <h2 className="text-sm lg:text-lg font-semibold">
-                {item.product.title || ""}
+                {item && item.product ? item.product.title : ""}
               </h2>
               <p className="text-sm lg:text-sm font-semibold">
                 Category:
-                <span>{item.product.category.name || ""}</span>
+                <span>
+                  {item && item.product ? item.product.category.name : ""}
+                </span>
               </p>
               <p
                 className="w-8 h-8 rounded-full "

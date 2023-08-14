@@ -10,13 +10,19 @@ import { getOneBrand } from "../../redux/actions/brandAction";
 
 const ViewProductDetailsHook = (prodID) => {
   const dispatch = useDispatch();
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  const [loadingRelated, setLoadingRelated] = useState(true);
+  const [imagesList, setImagesList] = useState([]);
+
+  const [products, setProducts] = useState([]);
+  const [item, setItem] = useState([]);
   // console.log(id);
   useEffect(() => {
     const getProduct = async () => {
-      // setLoading(true);
+      setLoading(true);
       await dispatch(getProductDetails(prodID));
-      // setLoading(false);
+      setLoading(false);
     };
     getProduct();
   }, []);
@@ -28,73 +34,52 @@ const ViewProductDetailsHook = (prodID) => {
     (state) => state.products.relatedProducts
   );
 
-  // useEffect(() => {
-  //   if (loading === false) {
-  //     console.log(oneProduct.data.brand);
-  //   }
-  // }, [loading]);
+  // let imagesList = [];
+  useEffect(() => {
+    if (loading === false) {
+      if (oneProduct && oneProduct.data) {
+        // console.log(oneProduct.data);
+        setItem(oneProduct.data);
+        let listImages = [];
+        if (oneProduct.data.images) {
+          oneProduct.data.images.map((img) => {
+            return listImages.push({
+              original: `${img.url}`,
+              thumbnail: `${img.url}`,
+            });
+          });
 
-  let item = [];
-  if (oneProduct && oneProduct.data) {
-    item = oneProduct.data;
-  } else {
-    item = [];
-  }
+          setImagesList(listImages);
+        } else {
+          setImagesList([
+            {
+              original: `${productOne}`,
+              thumbnail: `${productOne}`,
+            },
+          ]);
+        }
+      }
+    }
+  }, [loading]);
 
   useEffect(() => {
-    if (item.category) {
-      dispatch(getOneCategory(item.category._id));
-    }
-    if (item.brand) {
-      dispatch(getOneBrand(item.brand));
-    }
-    if (item.category) {
+    if (item && item.category) {
+      setLoadingRelated(true);
       dispatch(getRelatedProducts(item.category._id));
+      setLoadingRelated(false);
     }
-  }, []);
+  }, [item]);
 
-  let imagesList = [];
-  if (item) {
-    if (item.images) {
-      imagesList = item.images.map((img) => {
-        return { original: `${img}`, thumbnail: `${img}` };
-      });
+  useEffect(() => {
+    if (loadingRelated === false) {
+      if (relatedProducts && relatedProducts.data) {
+        setProducts(relatedProducts.data.slice(0, 4));
+        console.log(products);
+      }
     }
-  } else {
-    imagesList = [
-      {
-        original: `${productOne}`,
-        thumbnail: `${productOne}`,
-      },
-    ];
-  }
-  // console.log(imagesList);
-  let productCategory = [];
+  }, [loadingRelated]);
 
-  if (oneCategory.data) {
-    productCategory = oneCategory.data;
-  } else {
-    productCategory = [];
-  }
-
-  let productBrand = [];
-
-  if (oneBrand.data) {
-    productBrand = oneBrand.data;
-  }
-
-  let productsList = [];
-  let products = [];
-  if (relatedProducts) {
-    productsList = relatedProducts.data;
-    if (productsList) {
-      products = productsList.slice(0, 4);
-    }
-  } else {
-    products = [];
-  }
-
-  return [item, imagesList, productCategory, productBrand, products];
+  return [item, imagesList, products];
 };
 
 export default ViewProductDetailsHook;

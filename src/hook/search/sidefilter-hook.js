@@ -8,39 +8,68 @@ const SideFilterHook = () => {
   const dispatch = useDispatch();
   const [productsList, pageCount, onPress, getProducts, results] =
     ViewSearchProductsHook();
+
+  const [loadingCat, setLoadingCat] = useState(true);
+  const [loadingBrand, setLoadingBrand] = useState(true);
+  const [brandList, setBrandList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
     const run = async () => {
+      setLoadingCat(true);
       await dispatch(getAllCategory(50));
+      setLoadingCat(false);
+      setLoadingBrand(true);
       await dispatch(getAllBrand(50));
+      setLoadingBrand(false);
     };
     run();
   }, []);
 
   const brands = useSelector((state) => state.allBrand.brand);
   const categories = useSelector((state) => state.allCategory.category);
-  let category = [];
-  if (categories) {
-    if (categories.data) {
-      // eslint-disable-next-line array-callback-return
-      categories.data.map((item) => {
-        category.push({ value: item._id, label: item.name, checked: false });
+  useEffect(() => {
+    if (loadingCat === false) {
+      if (categories) {
+        if (categories.data) {
+          let category = [];
 
-        // return item;
-      });
+          // eslint-disable-next-line array-callback-return
+          categories.data.map((item) => {
+            return category.push({
+              value: item._id,
+              label: item.name,
+              checked: false,
+            });
+          });
+          setCategoryList(category);
+        }
+      }
     }
-  }
+  }, [loadingCat]);
+  // console.log({ cat: categoryList });
 
-  let brand = [];
-  if (brands) {
-    if (brands.data) {
-      // eslint-disable-next-line array-callback-return
-      brands.data.map((item) => {
-        brand.push({ value: item._id, label: item.name, checked: false });
+  useEffect(() => {
+    if (loadingBrand === false) {
+      if (brands) {
+        if (brands.data) {
+          let brand = [];
+          // eslint-disable-next-line array-callback-return
+          brands.data.map((item) => {
+            return brand.push({
+              value: item._id,
+              label: item.name,
+              checked: false,
+            });
 
-        // return item;
-      });
+            // return item;
+          });
+          setBrandList(brand);
+        }
+      }
     }
-  }
+  }, [loadingBrand]);
+
+  // console.log({ bra: brandList });
 
   const [catChecked, setCatChecked] = useState([]);
   var queryCat = "";
@@ -90,7 +119,7 @@ const SideFilterHook = () => {
   }, [brandChecked]);
 
   //   console.log(brandChecked);
-  return [category, brand, clickCategory, clickBrand];
+  return [categoryList, brandList, clickCategory, clickBrand];
 };
 
 export default SideFilterHook;

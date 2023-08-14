@@ -12,9 +12,7 @@ const Categories = () => {
   //   console.log(pageCount);
   //   console.log(getPage);
   // }
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  });
+
   return (
     <>
       <div className="container mx-auto">

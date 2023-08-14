@@ -15,7 +15,7 @@ const HomeCategory = () => {
             btnTitle="Browse all categories →"
             path="/allcategory"
           />
-          <div className="grid grid-cols-1 lg:grid-cols-5 place-content-center  place-items-center gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5  place-content-center  place-items-center gap-y-8">
             {loading === false ? (
               items.length > 0 ? (
                 items.map((category, index) => {
@@ -24,7 +24,7 @@ const HomeCategory = () => {
                       key={index}
                       title={category.name}
                       id={category._id}
-                      img={category.image}
+                      img={category.image.url}
                     />
                   );
                 })

@@ -26,7 +26,6 @@ const AdminEditProduct = () => {
     removeColor,
     onSelect,
     onRemove,
-    onImageChange,
     handleSubmit,
     images,
     setImages,
@@ -68,7 +67,7 @@ const AdminEditProduct = () => {
     <>
       <div className="container mx-auto">
         <div className="pl-5 mb-10 ">
-          <h1 className="font-bold text-xl">Add New Product</h1>
+          <h1 className="font-bold text-xl">Edit Product</h1>
         </div>
         <div className="flex flex-col mb-6 justify-center items-center">
           <p className="font-semibold text-base pb-3 mr-7">Product Image</p>
@@ -83,11 +82,11 @@ const AdminEditProduct = () => {
                 max={5}
                 // cropConfig={{ crop, ruleOfThirds: true }}
               />
-              <input
+              {/* <input
                 type="file"
                 className=" opacity-0 absolute  rotate-45 bg-red-400 w-full  top-1/3"
                 onChange={onImageChange}
-              />
+              /> */}
             </div>
           </div>
         </div>

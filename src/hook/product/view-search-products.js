@@ -63,14 +63,14 @@ const ViewSearchProductsHook = () => {
     }
   };
   let pageCount = 0;
-  if (products.paginationResult) {
+  if (products && products.paginationResult) {
     pageCount = products.paginationResult.numberOfPages;
   } else {
     pageCount = 0;
   }
 
   let results = 0;
-  if (products.results) {
+  if (products && products.results) {
     results = products.results;
   } else {
     results = 0;

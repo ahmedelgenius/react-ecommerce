@@ -22,7 +22,6 @@ const AdminAddProducts = () => {
     removeColor,
     onSelect,
     onRemove,
-    onImageChange,
     handleSubmit,
     images,
     setImages,
@@ -60,6 +59,11 @@ const AdminAddProducts = () => {
   //   colors,
   //   images
   // );
+  const crop = {
+    unit: "px",
+    aspect: 4 / 3,
+    width: "300",
+  };
   return (
     <>
       <div className="container mx-auto">
@@ -74,16 +78,17 @@ const AdminAddProducts = () => {
               <MultiImageInput
                 images={images}
                 allowCrop={false}
+                // cropConfig={{ crop, ruleOfThirds: true }}
                 setImages={setImages}
                 theme={"light"}
                 max={5}
                 // cropConfig={{ crop, ruleOfThirds: true }}
               />
-              <input
+              {/* <input
                 type="file"
                 className=" opacity-0 absolute  rotate-45 bg-red-400 w-full  top-1/3"
                 onChange={onImageChange}
-              />
+              /> */}
             </div>
           </div>
         </div>

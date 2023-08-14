@@ -33,7 +33,7 @@ export default function App() {
         <SwiperSlide>
           <div>
             <img src={bgOne} className="relative " alt="" />
-            <Link to="#" className=" ">
+            <Link to="/categories" className=" ">
               <button className="btn text-white  justify-center items-center  hidden lg:flex w-60 h-14 bg-gray-600 absolute top-[100px] right-[100px]">
                 Shop Now
               </button>
@@ -43,7 +43,7 @@ export default function App() {
         <SwiperSlide>
           <div>
             <img src={bgTwo} className="relative  " alt="" />
-            <Link to="#" className=" ">
+            <Link to="/categories" className=" ">
               <button className="btn text-white  justify-center items-center hidden lg:flex w-60 h-14 bg-gray-600 absolute top-[100px] right-[100px]">
                 Shop Now
               </button>

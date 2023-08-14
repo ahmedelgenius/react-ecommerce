@@ -118,7 +118,7 @@ const AdminAllProductsCard = ({ item }) => {
         </Link>
         <Link to={`/products/${item._id}`} className="flex flex-col  ">
           <div className="w-auto  h-1/2  p-6 ">
-            <img src={item.imageCover} className=" " alt="" />
+            <img src={item.imageCover.url} className=" " alt="" />
           </div>
           <div className="px-4  flex items-center flex-col ">
             <h2 className="text-xl font-bold text-center truncate w-64">

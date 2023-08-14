@@ -5,7 +5,7 @@ import ProductsContainer from "./ProductsContainer";
 
 const RelatedProducts = () => {
   const { id } = useParams();
-  const [item, images, category, brand, products] = ViewProductDetailsHook(id);
+  const [item, imagesList, products] = ViewProductDetailsHook(id);
   return (
     <div>
       {products.length > 0 ? (

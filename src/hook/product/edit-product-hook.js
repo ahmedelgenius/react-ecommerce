@@ -20,14 +20,14 @@ const EditProductHook = (id) => {
   const [prodDescEg, setProdDescEg] = useState("");
   const [prodDescAr, setProdDescAr] = useState("");
   const [priceAfterValue, setPriceAfterValue] = useState(null);
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(null);
-  const [img, setImg] = useState(uploadImg);
+  // const [img, setImg] = useState(uploadImg);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [catID, setCatID] = useState(0);
+  const [catID, setCatID] = useState("");
   const [brandID, setBrandID] = useState("");
   const [selectedSubID, setSelectedSubID] = useState([]);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState({});
   const [colors, setColors] = useState([]);
   const [options, setOptions] = useState([]);
   const [show, setShow] = useState(false);
@@ -59,6 +59,7 @@ const EditProductHook = (id) => {
   }
   useEffect(() => {
     if (productItem) {
+      console.log(productItem.images);
       //   console.log(productItem.category._id);
       setProdNameEg(productItem.title);
       setProdNameAr(productItem.titleAr);
@@ -71,7 +72,15 @@ const EditProductHook = (id) => {
       setBrandID(productItem.brand);
       setColors(productItem.colors);
       //   setOptions(productItem.subcategories);
-      setImages(productItem.images);
+      let listOfImages = [];
+      if (productItem.images.length > 0) {
+        for (let i = 0; i < productItem.images.length; i++) {
+          listOfImages.push(productItem.images[i].url);
+        }
+      }
+      setImages(listOfImages);
+
+      // console.log();
     }
   }, [productItem]);
 
@@ -174,12 +183,13 @@ const EditProductHook = (id) => {
   const onRemove = (selectedList) => {
     setSelectedSubID(selectedList);
   };
-  const onImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImg(URL.createObjectURL(e.target.files[0]));
-      setSelectedImage(e.target.files[0]);
-    }
-  };
+
+  // const onImageChange = (e) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     setImg(URL.createObjectURL(e.target.files[0]));
+  //     setSelectedImage(e.target.files[0]);
+  //   }
+  // };
   // to convert from base64 to file
   //to convert base 64 to file
   function dataURLtoFile(dataurl, filename) {
@@ -240,6 +250,14 @@ const EditProductHook = (id) => {
         itemImages.push(dataURLtoFile(images[index], Math.random() + ".png"));
       }
     });
+    // // to convert from base64 to file
+    // const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
+    // // to convert from array to file
+    // const itemImages = Array.from(Array(Object.keys(images).length).keys()).map(
+    //   (item, index) => {
+    //     return dataURLtoFile(images[index], Math.random() + ".png");
+    //   }
+    // );
 
     const formData = new FormData();
     formData.append("title", prodNameEg);
@@ -280,26 +298,27 @@ const EditProductHook = (id) => {
   }
   useEffect(() => {
     if (loading === false) {
-      //   setProdNameEg("");
-      //   setProdNameAr("");
-      //   setProdDescEg("");
-      //   setProdDescAr("");
-      //   setPriceAfterValue(null);
-      //   setPrice(null);
-      //   setQuantity(null);
-      //   setSelectedImage(null);
-      //   setCatID("");
-      //   setBrandID("");
-      //   setSelectedSubID([]);
-      //   setImages([]);
-      //   setColors([]);
-      //   setOptions([]);
-      setTimeout(() => setLoading(false), 1500);
+      // setProdNameEg("");
+      // setProdNameAr("");
+      // setProdDescEg("");
+      // setProdDescAr("");
+      // setPriceAfterValue(null);
+      // setPrice(null);
+      // setQuantity(null);
+      // setSelectedImage(null);
+      // setCatID("");
+      // setBrandID("");
+      // setSelectedSubID([]);
+      // setImages([]);
+      // setColors([]);
+      // setOptions([]);
+      // setTimeout(() => setLoading(false), 1500);
       if (product) {
-        if (product.status === 200) {
-          notify("product is created", "success");
+        console.log(product);
+        if (product && product.data) {
+          notify("product update is successfully", "success");
         } else {
-          notify("there error in data", "error");
+          notify("product update is fail", "error");
         }
       }
     }
@@ -315,7 +334,6 @@ const EditProductHook = (id) => {
     removeColor,
     onSelect,
     onRemove,
-    onImageChange,
     handleSubmit,
     images,
     setImages,

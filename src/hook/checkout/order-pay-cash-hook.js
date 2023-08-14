@@ -20,18 +20,21 @@ const OrderPayCashHook = () => {
   ] = GetAllUserCart();
   const toast = useRef(null);
   const navigate = useNavigate();
-  console.log(cartID);
+  // console.log(cartID);
+
+  // const [selectedBtn, setSelectedBtn] = useState(radioBtns[1]);
+
   const radioBtns = [
     {
       id: "cash",
-      name: "cash",
-      value: "Payment when receiving",
+      name: "Payment when receiving",
+      value: "cash",
       inputId: "f1",
     },
     {
       id: "card",
-      name: "card",
-      value: "Payment by credit card",
+      name: "Payment by credit card",
+      value: "card",
       inputId: "f2",
     },
   ];
@@ -82,8 +85,9 @@ const OrderPayCashHook = () => {
 
   //   console.log(addresses);
   const onSelectAddress = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setAddressSelected(e.target.value);
+
     get(e.target.value);
   };
 
@@ -119,7 +123,10 @@ const OrderPayCashHook = () => {
       notify("please add products in your cart", "warn");
       return;
     }
-
+    if (addressSelected === "") {
+      notify("please choose address", "warn");
+      return;
+    }
     setLoading(true);
     await dispatch(
       createOrderCash(cartID, {
@@ -157,8 +164,10 @@ const OrderPayCashHook = () => {
     handelOrderCash,
     addressesList,
     addressSelected,
+
     totalPrice,
     totalPriceAfterDiscount,
+    addressDetails,
   ];
 };
 

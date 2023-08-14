@@ -4,6 +4,8 @@ import ViewProductDetailsHook from "../../hook/product/view-product-details.hook
 import { useParams } from "react-router-dom";
 import AddToCartHook from "../../hook/cart/add-to- cart-hook";
 import { ToastContainer } from "react-toastify";
+import ProductCardHook from "../../hook/product/product-card-hook";
+import ProductsContainerHook from "../../hook/product/products-container-hook";
 
 // const product = {
 //   name: "Basic Tee 6-Pack",
@@ -41,10 +43,10 @@ import { ToastContainer } from "react-toastify";
 const selectedClass = "ring-gray-500";
 const ProductContent = () => {
   const { id } = useParams();
-  const [item, imagesList, productCategory, productBrand, products] =
-    ViewProductDetailsHook(id);
-
-  console.log(productBrand.name);
+  const [item, imagesList, products] = ViewProductDetailsHook(id);
+  const [favList] = ProductsContainerHook();
+  const [isFavIcon, handelFav] = ProductCardHook(favList, id);
+  // console.log(productBrand.name);
   const [selectedColor, onSelectColor, classNames, addToCartHandel] =
     AddToCartHook(id, item);
   let colorsList = [];
@@ -61,7 +63,7 @@ const ProductContent = () => {
               <span className="text-base  font-medium text-gray-900">
                 Category :
               </span>{" "}
-              {productCategory.name}
+              {item.category ? item.category.name : ""}
             </h2>
 
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
@@ -73,7 +75,7 @@ const ProductContent = () => {
                 Brand :{" "}
               </span>
 
-              {productBrand.name}
+              {item.brand ? item.brand.name : ""}
             </h2>
 
             <form className="my-6">
@@ -134,8 +136,18 @@ const ProductContent = () => {
             >
               Add to Cart
             </button>
-            <button className="py-2 px-3 flex justify-center items-center rounded-md hover:bg-gray-500 hover:text-white">
-              <i className="pi pi-heart " style={{ fontSize: "1.5rem" }}></i>
+            <button
+              onClick={handelFav}
+              className="py-2 px-3 flex justify-center items-center rounded-md border-2 border-gray-600 hover:bg-gray-500 hover:text-white"
+            >
+              {isFavIcon === true ? (
+                <i
+                  className="pi pi-heart-fill"
+                  style={{ color: "red", fontSize: "1.5rem" }}
+                ></i>
+              ) : (
+                <i className="pi pi-heart " style={{ fontSize: "1.5rem" }}></i>
+              )}
             </button>
           </div>
           {/* Options */}

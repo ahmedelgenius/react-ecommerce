@@ -21,7 +21,7 @@ const CategoryContainer = ({ categories, loading }) => {
                 key={index}
                 title={category.name}
                 id={category._id}
-                img={category.image}
+                img={category.image.url}
               />
             );
           })

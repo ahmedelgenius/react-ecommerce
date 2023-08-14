@@ -5,10 +5,13 @@ const CategoryCard = ({ title, img, id }) => {
   return (
     <Link
       to={`/products/category/${id}`}
-      className="bg-gray-400 hover:bg-gray-300 p-10  w-52 h-52 relative flex justify-center items-start rounded-full"
+      className=" bg-gray-200 shadow-md   w-52 h-52 relative flex flex-col justify-center items-center rounded-lg"
+      // style={{ backgroundImage: `${img}`, backgroundPosition: "100% 100%" }}
     >
-      <img src={img} alt="" />
-      <h3 className="absolute bottom-8 left-10 text-lg   text-white font-bold">
+      <div className="w-3/4">
+        <img src={img} className="" alt="" />
+      </div>
+      <h3 className=" text-lg absolute bottom-2   text-black font-bold">
         {title}
       </h3>
     </Link>

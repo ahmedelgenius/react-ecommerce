@@ -17,8 +17,8 @@ const ProductsContainer = ({ title, btnTitle, path, girdValue, products }) => {
       <div
         className={
           girdValue === 3
-            ? "grid grid-cols-1 lg:grid-cols-3 place-content-center place-items-center gap-y-8"
-            : "grid grid-cols-1 lg:grid-cols-4 place-content-center place-items-center gap-y-8"
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-y-8"
+            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-content-center place-items-center gap-y-8"
         }
       >
         {products
@@ -28,7 +28,7 @@ const ProductsContainer = ({ title, btnTitle, path, girdValue, products }) => {
                   key={index}
                   name={item.title}
                   price={item.price}
-                  img={item.imageCover}
+                  img={item.imageCover.url}
                   rating={item.ratingsAverage}
                   priceAfterDiscount={item.priceAfterDiscount}
                   id={item._id}

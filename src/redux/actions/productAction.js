@@ -18,12 +18,11 @@ import {
 export const createProduct = (formData) => async (dispatch) => {
   try {
     // const res = await baseURL.get("/api/v1/categories");
-
     const response = await useInsertDataWithImage(`/api/v1/products`, formData);
     console.log(response);
     dispatch({
       type: CREATE_PRODUCT,
-      payload: response.data,
+      payload: response,
       loading: true,
     });
   } catch (e) {
