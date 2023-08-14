@@ -82,9 +82,9 @@ const Navbar = () => {
                   </Disclosure.Button>
                 </div>
 
-                <div className="flex flex-1 items-center lg:justify-center pl-5 sm:items-stretch sm:justify-start">
+                <div className="flex flex-1 items-center  lg:justify-center pl-5 sm:items-stretch sm:justify-start">
                   {/* logo */}
-                  <Link to="/" className="flex flex-shrink-0 items-center">
+                  <Link to="/" className="flex flex-shrink-0  items-center">
                     <img
                       className="block h-44 w-auto lg:hidden"
                       src={logo}
@@ -98,8 +98,8 @@ const Navbar = () => {
                   </Link>
 
                   {/* navigation  */}
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4 mt-[70px] ml-10">
+                  <div className="hidden sm:ml-6  sm:block">
+                    <div className="flex space-x-4  sm:space-x-1 mt-[70px] sm:ml-[0px] ml-10">
                       {navigation.map((item) => (
                         <NavLink
                           key={item.name}
