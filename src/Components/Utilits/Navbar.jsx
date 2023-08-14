@@ -17,8 +17,8 @@ import GetAllUserCart from "../../hook/cart/get-all-user-cart-hook";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Categories", href: "/categories", current: false },
-  { name: "About Us", href: "/about", current: false },
-  { name: "Contact Us", href: "/contact", current: false },
+  { name: "About", href: "/about", current: false },
+  { name: "Contact", href: "/contact", current: false },
 ];
 
 function classNames(...classes) {
