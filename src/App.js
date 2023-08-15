@@ -62,7 +62,6 @@ function App() {
         <Route path="/products/:id" element={<ProductPage />} />
         <Route path="/products/category/:id" element={<ProductsByCategory />} />
         <Route path="/products/brand/:id" element={<ProductsByBrand />} />
-
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/verify-password" element={<VerifyPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />

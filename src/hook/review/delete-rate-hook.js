@@ -12,8 +12,10 @@ const DeleteReviewHook = (review) => {
   const cancelButtonRef = useRef(null);
   let user = JSON.parse(localStorage.getItem("user"));
   let isUser = false;
-  if (review.user._id === user._id) {
-    isUser = true;
+  if (JSON.parse(localStorage.getItem("user")) != null) {
+    if (review.user._id === user._id) {
+      isUser = true;
+    }
   }
 
   const res = useSelector((state) => state.reviewReducer.deleteReview);
