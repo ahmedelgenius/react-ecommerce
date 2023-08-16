@@ -41,10 +41,11 @@ const AddToCartHook = (id, item) => {
   useEffect(() => {
     if (loading === false) {
       if (res && res.status === "success") {
-        notify("product added to cart successfully", "success");
-        setTimeout(() => {
-          window.location.reload(false);
-        }, 1000);
+        // notify("product added to cart successfully", "success");
+        window.location.reload(false);
+        // setTimeout(() => {
+
+        // }, 1000);
       } else {
         notify("please login and try again", "warn");
       }
