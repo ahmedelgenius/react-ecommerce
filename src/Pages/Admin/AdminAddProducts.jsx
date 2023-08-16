@@ -115,7 +115,7 @@ const AdminAddProducts = () => {
               <label htmlFor="productName">Product Name (Arabic)</label>
             </span>
           </div>
-          <div className="card flex justify-content-center">
+          <div className="card hidden lg:flex justify-content-center">
             <InputTextarea
               value={prodDescEg}
               onChange={onChangeDescEg}
@@ -124,7 +124,16 @@ const AdminAddProducts = () => {
               cols={60}
             />
           </div>
-          <div className="card flex justify-content-center">
+          <div className="card flex lg:hidden justify-content-center">
+            <InputTextarea
+              value={prodDescEg}
+              onChange={onChangeDescEg}
+              placeholder="Product Description (English)"
+              rows={5}
+              cols={20}
+            />
+          </div>
+          <div className="card hidden lg:flex justify-content-center">
             <InputTextarea
               value={prodDescAr}
               onChange={onChangeDescAr}
@@ -133,18 +142,27 @@ const AdminAddProducts = () => {
               cols={60}
             />
           </div>
-          <div className="w-1/2">
+          <div className="card flex lg:hidden justify-content-center">
+            <InputTextarea
+              value={prodDescAr}
+              onChange={onChangeDescAr}
+              placeholder="Product Description (Arabic)"
+              rows={5}
+              cols={20}
+            />
+          </div>
+          <div className="w-full lg:w-1/2 flex justify-center lg:block ">
             <span className="p-float-label">
               <InputNumber
                 id="number-input"
                 value={priceAfterValue}
-                className="w-full"
+                className="w-1/2 lg:w-full"
                 onValueChange={onChangePriceAfter}
               />
               <label htmlFor="number-input">Price After Discount</label>
             </span>
           </div>
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2 flex justify-center lg:block">
             <span className="p-float-label">
               <InputNumber
                 id="number-input"
@@ -155,7 +173,7 @@ const AdminAddProducts = () => {
               <label htmlFor="number-input">Product Price </label>
             </span>
           </div>
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2 flex justify-center lg:block">
             <span className="p-float-label">
               <InputNumber
                 id="number-input"

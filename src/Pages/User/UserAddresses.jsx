@@ -11,7 +11,7 @@ const UserAddresses = () => {
   return (
     <div className="container mx-auto ">
       <div className="pl-5 mb-5">
-        <h1 className="font-bold text-xl">My Addresses </h1>
+        <h1 className="font-bold text-lg lg:text-xl">My Addresses </h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3  mx-5">
         {addresses ? (

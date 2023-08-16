@@ -35,25 +35,25 @@ const AdminAllOrdersItem = ({ orderItem, numberOrder }) => {
       to={`/admin/orders/${orderItem._id}`}
       className="border-b-2 border-t-2 py-5  mb-5"
     >
-      <div className="flex justify-between">
+      <div className="flex gap-5  lg:justify-between">
         <p className="text-lg lg:text-lg pb-5">
-          <span className="text-lg lg:text-lg font-semibold">
+          <span className="text-base lg:text-lg font-semibold">
             Order number :{" "}
           </span>
           #{numberOrder ? numberOrder : ""}
         </p>
-        <p className="font-semibold text-xl  mr-10">
+        <p className="font-semibold text-base lg:text-xl lg:pt-0  pt-[3px] lg:mr-10">
           Total : {orderItem.totalOrderPrice || 0}
         </p>
       </div>
       <div className="flex justify-center my-5">
-        <p className="text-lg lg:text-lg font-semibold">
+        <p className="text-base lg:text-lg font-semibold">
           Order By : {orderItem.user.name} , Email:{orderItem.user.email}
         </p>
       </div>
-      <div className=" flex justify-evenly mt-5">
+      <div className=" flex lg:flex-row flex-col justify-evenly mt-5">
         <div className="flex justify-start">
-          <p className="font-semibold text-lg mr-10">
+          <p className="font-semibold text-base lg:text-lg mr-10">
             Order status :{" "}
             {orderItem.isDelivered === false ? (
               <span className="text-gray-500">Underway</span>
@@ -63,7 +63,7 @@ const AdminAllOrdersItem = ({ orderItem, numberOrder }) => {
           </p>
         </div>
         <div className="flex justify-start">
-          <p className="font-semibold text-lg mr-10">
+          <p className="font-semibold text-base lg:text-lg mr-10">
             Payment Status :{" "}
             {orderItem.isPaid === false ? (
               <span className="text-gray-500">Not Done</span>
@@ -73,7 +73,7 @@ const AdminAllOrdersItem = ({ orderItem, numberOrder }) => {
           </p>
         </div>
         <div className="flex justify-start">
-          <p className="font-semibold text-lg mr-10">
+          <p className="font-semibold text-base lg:text-lg mr-10">
             Payment Method :{" "}
             {orderItem.paymentMethodType === "cash" ? (
               <span className="text-gray-500">Cash</span>

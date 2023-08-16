@@ -56,9 +56,9 @@ const AdminOrdersDetails = () => {
                 : null
               : null}
 
-            <div className=" flex justify-evenly my-2">
+            <div className=" flex lg:flex-row flex-col justify-evenly my-2">
               <div className="flex justify-start">
-                <p className="font-semibold text-lg mr-10">
+                <p className="font-semibold text-base lg:text-lg mr-10">
                   Order status :{" "}
                   {orderItem.isDelivered === false ? (
                     <span className="text-gray-500">Underway</span>
@@ -68,7 +68,7 @@ const AdminOrdersDetails = () => {
                 </p>
               </div>
               <div className="flex justify-start">
-                <p className="font-semibold text-lg mr-10">
+                <p className="font-semibold text-base lg:text-lg mr-10">
                   Payment Status :{" "}
                   {orderItem.isPaid === false ? (
                     <span className="text-gray-500">Not Done</span>
@@ -78,7 +78,7 @@ const AdminOrdersDetails = () => {
                 </p>
               </div>
               <div className="flex justify-start">
-                <p className="font-semibold text-lg mr-10">
+                <p className="font-semibold text-base lg:text-lg mr-10">
                   Payment Method :{" "}
                   {orderItem.paymentMethodType === "cash" ? (
                     <span className="text-gray-500">Cash</span>
@@ -93,7 +93,7 @@ const AdminOrdersDetails = () => {
       </div>
 
       <div
-        className="mx-10 py-20 px-10 "
+        className=" ml-2 lg:mx-10 py-20 pl-3 lg:px-10 "
         style={{ backgroundColor: "#f7f7f7" }}
       >
         <div>
@@ -117,8 +117,8 @@ const AdminOrdersDetails = () => {
             Total Order : {orderItem.totalOrderPrice || 0}
           </p>
         </div>
-        <div className="flex justify-evenly flex-col lg:flex-row w-full">
-          <div className="flex justify-center mt-10">
+        <div className="flex lg:justify-evenly   flex-col lg:flex-row w-1/2 lg:w-full">
+          <div className="flex lg:justify-center justify-start mt-10">
             <button
               onClick={handelChangeDeliver}
               className="bg-gray-900 px-5 py-3 mr-1 rounded-lg text-white"
@@ -135,7 +135,7 @@ const AdminOrdersDetails = () => {
               className=" w-full md:w-full"
             />
           </div>
-          <div className="flex justify-center mt-10">
+          <div className="flex lg:justify-center justify-start mt-10">
             <button
               onClick={handelChangePay}
               className="bg-gray-900 px-5 py-3 mr-1 rounded-lg text-white"

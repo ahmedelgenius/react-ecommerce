@@ -32,7 +32,7 @@ const ProductCard = ({
   // console.log(item.images);
   return (
     <div
-      className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
+      className="  lg:h-[380px] w-[250px] lg:w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
       style={{ backgroundColor: "#F1F1F1" }}
     >
       {" "}
@@ -64,7 +64,7 @@ const ProductCard = ({
           />
         </div>
         <div className="px-4  flex items-center flex-col mt-2 ">
-          <h2 className="text-xl font-bold text-center truncate w-64">
+          <h2 className="text-base lg:text-xl  font-bold text-center truncate w-64">
             {name}
           </h2>
           <div className="  ">

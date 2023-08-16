@@ -25,7 +25,7 @@ const UserProductsCard = ({ item }) => {
                 alt=""
               />
             </div>
-            <div className="flex  flex-col justify-between">
+            <div className="flex mr-5 lg:mr-0 flex-col justify-between">
               <h2 className="text-sm lg:text-lg font-semibold">
                 {item && item.product ? item.product.title : ""}
               </h2>

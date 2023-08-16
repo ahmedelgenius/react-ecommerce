@@ -65,7 +65,7 @@ const RatePost = () => {
 
       <div className="card flex justify-center">
         <form className="flex flex-col gap-3">
-          <div className="mt-2">
+          <div className="mt-2 hidden lg:block">
             <InputTextarea
               onChange={(e) => onChangeRateText(e.target.value)}
               autoResize
@@ -73,11 +73,19 @@ const RatePost = () => {
               cols={60}
             />
           </div>
+          <div className="mt-2 lg:hidden">
+            <InputTextarea
+              onChange={(e) => onChangeRateText(e.target.value)}
+              autoResize
+              rows={3}
+              cols={20}
+            />
+          </div>
           <div className="flex justify-center items-center">
             <Button
               label="Submit"
               onClick={onSubmit}
-              className="hover:opacity-90 w-1/4"
+              className="hover:opacity-90 w-1/2 lg:w-1/4 "
               style={{ backgroundColor: "#6366F1" }}
               type="submit"
               //   icon="pi pi-check"

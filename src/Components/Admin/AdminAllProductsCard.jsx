@@ -21,7 +21,7 @@ const AdminAllProductsCard = ({ item }) => {
   return (
     <>
       <div
-        className="h-[380px] w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
+        className="h-[380px] w-[252px] lg:w-[282px] max-h-[380px]  relative  border-2 rounded-xl "
         style={{ backgroundColor: "#F1F1F1" }}
       >
         <Transition.Root show={open} as={Fragment}>
@@ -106,22 +106,26 @@ const AdminAllProductsCard = ({ item }) => {
         </Transition.Root>{" "}
         <button
           onClick={() => setOpen(true)}
-          className="absolute top-4 left-5 font-medium text-red-600 hover:text-red-500"
+          className="absolute top-0 lg:top-1 left-3 font-medium text-red-600 hover:text-red-500"
         >
           Remove
         </button>
         <Link
           to={`/admin/editproduct/${item._id}`}
-          className="absolute top-4 right-5 font-medium text-indigo-600 hover:text-indigo-500"
+          className="absolute top-0 lg:top-1 right-3 font-medium text-indigo-600 hover:text-indigo-500"
         >
           Edit
         </Link>
         <Link to={`/products/${item._id}`} className="flex flex-col  ">
           <div className="w-auto  h-1/2  p-6 ">
-            <img src={item.imageCover.url} className=" " alt="" />
+            <img
+              src={item.imageCover.url}
+              className=" rounded-md w-[250px] h-[200px]"
+              alt=""
+            />
           </div>
           <div className="px-4  flex items-center flex-col ">
-            <h2 className="text-xl font-bold text-center truncate w-64">
+            <h2 className=" text-lg lg:text-xl font-bold text-center truncate w-64">
               {item.title}
             </h2>
             <div className="  ">

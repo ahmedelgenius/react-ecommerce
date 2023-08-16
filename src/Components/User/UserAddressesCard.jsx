@@ -94,7 +94,7 @@ const UserAddressesCard = ({ address }) => {
         <p className="pb-3">{address.details}</p>
         <p className="">Phone Number : {address.phone}</p>
       </div>
-      <div className="absolute right-4 top-3 flex gap-10">
+      <div className="absolute right-4 top-4 lg:top-3 flex gap-5 lg:gap-10">
         <Link
           to={`/user/edit-address/${address._id}`}
           class="font-medium text-indigo-600 hover:text-indigo-500"

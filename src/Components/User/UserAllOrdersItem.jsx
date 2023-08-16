@@ -7,13 +7,13 @@ const UserAllOrdersItem = ({ orderItem, numberOrder }) => {
     <div>
       <div className="border-b-2 border-t-2 py-5  mb-5">
         <div className="flex justify-between">
-          <p className="text-lg lg:text-lg pb-5">
-            <span className="text-lg lg:text-lg font-semibold">
+          <p className="text-base lg:text-lg pb-5">
+            <span className="text-base lg:text-lg font-semibold">
               Order number :{" "}
             </span>
             #{numberOrder ? numberOrder : ""}
           </p>
-          <p className="font-semibold text-xl mr-10">
+          <p className="font-semibold text-lg lg:text-xl mr-10">
             Total : {orderItem.totalOrderPrice || 0}
           </p>
         </div>
@@ -25,7 +25,7 @@ const UserAllOrdersItem = ({ orderItem, numberOrder }) => {
             : null
           : null}
 
-        <div className=" flex justify-evenly my-2">
+        <div className=" flex flex-col lg:flex-row justify-evenly my-2">
           <div className="flex justify-start">
             <p className="font-semibold text-lg mr-10">
               Order status :{" "}

@@ -54,7 +54,7 @@ const AdminAddCoupon = () => {
               <label htmlFor="ExpireDate">Expire Date </label>
             </span>
           </div>
-          <div className="w-1/2 ">
+          <div className="w-full lg:w-1/2 flex justify-center lg:block ">
             <span className="p-float-label  ">
               <InputNumber
                 id="Discount"
@@ -77,12 +77,15 @@ const AdminAddCoupon = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3  mx-5 mt-10">
-          {allCoupons ? (allCoupons.map((item,index)=>{
-            return  <AdminCouponCard  key={index} coupon={item}/>
-          })) : <div className="flex justify-center">
-            <p>There No Coupons Yet</p>
-            </div>}
-         
+          {allCoupons ? (
+            allCoupons.map((item, index) => {
+              return <AdminCouponCard key={index} coupon={item} />;
+            })
+          ) : (
+            <div className="flex justify-center">
+              <p>There No Coupons Yet</p>
+            </div>
+          )}
         </div>
         <ToastContainer />
       </div>

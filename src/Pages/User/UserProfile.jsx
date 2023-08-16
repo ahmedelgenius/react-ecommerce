@@ -5,8 +5,6 @@ import { InputText } from "primereact/inputtext";
 import UserProfileHook from "../../hook/user/user-profile-hook";
 import { InputTextarea } from "primereact/inputtextarea";
 const UserProfile = () => {
-
-
   const [
     user,
     open,
@@ -25,8 +23,7 @@ const UserProfile = () => {
     onChangeOldPassword,
     onChangeNewPassword,
     onChangeConfirmNewPassword,
-    changePassword
-
+    changePassword,
   ] = UserProfileHook();
   return (
     <div className="container mx-auto ">
@@ -142,28 +139,28 @@ const UserProfile = () => {
         </Dialog>
       </Transition.Root>{" "}
       <div className="pl-5 mb-5">
-        <h1 className="font-bold text-xl">My Profile</h1>
+        <h1 className="font-bold text-lg lg:text-xl">My Profile</h1>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-1 gap-3  mx-5">
         <div className="bg-slate-200 pb-8 pt-3 relative px-5 rounded-lg">
           <div className="flex flex-col ">
-            <p className="text-lg font-semibold pb-5">
+            <p className=" text-base lg:text-lg  font-semibold pb-5">
               {" "}
               Name : <span className="text-gray-600">{user.name}</span>
             </p>
-            <p className="text-lg font-semibold pb-5">
+            <p className="text-base lg:text-lg font-semibold pb-5">
               {" "}
               Phone Number : <span className="text-gray-600">{user.phone}</span>
             </p>
-            <p className="text-lg font-semibold ">
+            <p className="text-base lg:text-lg font-semibold ">
               {" "}
               Email : <span className="text-gray-600">{user.email}</span>
             </p>
           </div>
-          <div className="absolute right-8 top-3 flex gap-10">
+          <div className="absolute right-2 lg:right-8 top-3 flex gap-10">
             <button
               onClick={() => setOpen(true)}
-              className="font-medium text-lg text-indigo-500 hover:text-indigo-500"
+              className="font-medium text-base lg:text-lg  text-indigo-500 hover:text-indigo-500"
             >
               Edit
             </button>
@@ -181,7 +178,6 @@ const UserProfile = () => {
               <InputText
                 id="oldPassword"
                 value={oldPassword}
-
                 className="w-full"
                 type="password"
                 onChange={onChangeOldPassword}

@@ -18,7 +18,7 @@ const UserEditAddress = () => {
   return (
     <div>
       <div className="pl-5 mb-5">
-        <h1 className="font-bold text-xl">Edit Address </h1>
+        <h1 className="font-bold text-lg lg:text-xl">Edit Address </h1>
       </div>
       <div className="flex flex-col gap-8 items-center   ">
         <div className="w-1/2">
@@ -33,7 +33,7 @@ const UserEditAddress = () => {
             <label htmlFor="addressName">Address Name</label>
           </span>
         </div>
-        <div className="card flex justify-content-center">
+        <div className="card hidden lg:flex justify-content-center">
           <InputTextarea
             value={details}
             onChange={onChangeDetails}
@@ -41,6 +41,16 @@ const UserEditAddress = () => {
             placeholder="egypt, cairo , nsr city"
             rows={5}
             cols={60}
+          />
+        </div>
+        <div className="card flex lg:hidden justify-content-center">
+          <InputTextarea
+            value={details}
+            onChange={onChangeDetails}
+            // placeholder="Address Details"
+            placeholder="egypt, cairo , nsr city"
+            rows={5}
+            cols={25}
           />
         </div>
         <div className="w-1/2">

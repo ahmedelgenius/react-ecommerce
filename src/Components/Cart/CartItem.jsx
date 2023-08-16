@@ -123,7 +123,7 @@ const CartItem = ({ item }) => {
       </Transition.Root>{" "}
       <div className="grid grid-cols-2">
         <div className="">
-          <img src={item.product.imageCover || productOne} alt="" />
+          <img src={item.product.imageCover.url || productOne} alt="" />
         </div>
         <div className="flex  flex-col justify-between">
           <p className="text-sm lg:text-base">

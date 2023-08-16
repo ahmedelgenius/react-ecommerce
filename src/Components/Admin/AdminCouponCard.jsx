@@ -91,25 +91,27 @@ const AdminCouponCard = ({ coupon }) => {
         </Dialog>
       </Transition.Root>{" "}
       <div className="flex flex-col ">
-        <p className="text-lg font-semibold pb-5">
+        <p className=" text-base lg:text-lg font-semibold pb-5">
           Coupon Name : {coupon.name}
         </p>
-        <p className="pb-3 font-semibold">
+        <p className="pb-3 text-base lg:text-lg font-semibold">
           Expire Date : {formatDate(dateString)}
         </p>
-        <p className="font-semibold">Coupon Discount : {coupon.discount}%</p>
+        <p className="font-semibold text-base lg:text-lg">
+          Coupon Discount : {coupon.discount}%
+        </p>
       </div>
-      <div className="absolute right-4 top-3 flex gap-10">
+      <div className="absolute right-4 top-3 flex-col lg:flex-row flex gap-2 lg:gap-10">
         <Link
           to={`/admin/editcoupon/${coupon._id}`}
-          class="font-medium text-indigo-600 hover:text-indigo-500"
+          class="font-medium  text-sm lg:text-lg text-indigo-600 hover:text-indigo-500"
         >
           Edit
         </Link>
         <button
           onClick={() => setOpen(true)}
           type="button"
-          class="font-medium text-red-600 hover:text-red-500"
+          class="font-medium text-sm lg:text-lg text-red-600 hover:text-red-500"
         >
           Remove
         </button>

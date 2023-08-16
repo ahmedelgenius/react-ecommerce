@@ -34,7 +34,7 @@ const UserWishlist = () => {
   return (
     <div className="container mx-auto">
       <div className="pl-5 flex justify-center border-b-2 pb-4 mx-10 mb-5">
-        <h1 className="font-bold  text-xl">Wishlist</h1>
+        <h1 className="font-bold text-lg lg:text-xl">Wishlist</h1>
       </div>
       <div className=" lg:col-span-3">
         {items && items.length <= 0 ? (
