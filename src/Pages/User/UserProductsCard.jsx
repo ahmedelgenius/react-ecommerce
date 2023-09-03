@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 const UserProductsCard = ({ item }) => {
   const [selectedItem, setSelectedItem] = useState(1);
-  console.log(item);
+  console.log(item.product.imageCover.url);
   const items = [
     { label: 1, value: 1 },
     { label: 2, value: 2 },
@@ -13,6 +13,7 @@ const UserProductsCard = ({ item }) => {
     { label: 4, value: 4 },
     { label: 5, value: 5 },
   ];
+
   return (
     <div className="py-5">
       <Link>
@@ -21,7 +22,7 @@ const UserProductsCard = ({ item }) => {
             <div className="">
               {/* <img src={item.product.imageCover || productOne} alt="" /> */}
               <img
-                src={item && item.imageCover ? item.imageCover.url : productOne}
+                src={item.product ? item.product.imageCover.url : productOne}
                 alt=""
               />
             </div>
